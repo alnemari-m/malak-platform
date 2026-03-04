@@ -1,0 +1,16 @@
+\begin{table}[h]
+\centering
+\caption{Compression Strategy Comparison on CIFAR-10 (MobileNetV2)}
+\label{tab:compression_comparison}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Method} & \textbf{Accuracy} & \textbf{$\Delta$ vs. FP32} & \textbf{Size (MB)} & \textbf{Ratio} \\
+\hline
+FP32 Baseline & 89.28\% & - & 8.76 & 1.0$\times$ \\
+INT8 PTQ & 89.26\% & 0.02\% & 8.73 & 1.00$\times$ \\
+INT8 QAT & 88.78\% & 0.50\% & 8.73 & 1.00$\times$ \\
+\hline
+\multicolumn{5}{l}{\textit{Note: Dynamic quantization provides minimal size reduction.}} \\
+\multicolumn{5}{l}{\textit{Static quantization would achieve theoretical 4$\times$ compression.}} \\
+\end{tabular}
+\end{table}

@@ -1,0 +1,107 @@
+% Platform Architecture TikZ Figure
+% Include directly in main document with \input
+
+\begin{tikzpicture}[node distance=0.6cm]
+
+% Define colors
+\definecolor{pythonblue}{RGB}{52, 101, 164}
+\definecolor{cppgreen}{RGB}{78, 154, 6}
+\definecolor{mojoOrange}{RGB}{252, 175, 62}
+\definecolor{edgeirpurple}{RGB}{117, 80, 123}
+\definecolor{lightgray}{RGB}{238, 238, 236}
+
+% Define styles
+\tikzset{
+    component/.style={rectangle, rounded corners, minimum width=2.8cm, minimum height=0.8cm, text centered, draw=black, fill=#1, drop shadow, font=\small\sffamily},
+    arrow/.style={-Stealth, thick},
+    labelbox/.style={font=\scriptsize\sffamily\bfseries, text=#1}
+}
+
+% Title
+\node[font=\Large\sffamily\bfseries] at (0, 6.5) {Malak Platform Architecture};
+
+% Top Layer - Applications
+\node[component=pythonblue!30, minimum width=8cm] (apps) at (0, 5.2) {Reference Applications};
+\node[font=\tiny\sffamily, below=0.05cm of apps.north] {Vision Jellyfish • Energy Optimization • Neuro MS};
+
+% Core Specifications Layer
+\begin{scope}[on background layer]
+\node[fill=lightgray, rounded corners, fit={(-4.5, 3.8) (4.5, 4.6)}] (corebg) {};
+\end{scope}
+\node[labelbox=black] at (-3.5, 4.7) {CORE SPECS};
+\node[component=gray!20, minimum width=2.2cm, minimum height=0.5cm] (cards) at (-1.5, 4.2) {\scriptsize Model Cards};
+\node[component=gray!20, minimum width=2.2cm, minimum height=0.5cm] (schemas) at (1.2, 4.2) {\scriptsize Schemas};
+\node[component=gray!20, minimum width=2.2cm, minimum height=0.5cm] (policies) at (3.9, 4.2) {\scriptsize Policies};
+
+% Python Layer
+\begin{scope}[on background layer]
+\node[fill=pythonblue!10, rounded corners, fit={(-4.5, 1.5) (4.5, 3.4)}] (pythonbg) {};
+\end{scope}
+\node[labelbox=pythonblue] at (-3.5, 3.5) {PYTHON};
+
+\node[component=pythonblue!40, minimum width=1.8cm] (train) at (-3, 2.8) {\scriptsize Training};
+\node[component=pythonblue!40, minimum width=1.8cm] (compress) at (-0.8, 2.8) {\scriptsize Compression};
+\node[component=pythonblue!40, minimum width=1.8cm] (compile) at (1.4, 2.8) {\scriptsize Compilation};
+\node[component=pythonblue!40, minimum width=1.8cm] (monitor) at (3.6, 2.8) {\scriptsize Monitoring};
+
+\node[font=\tiny\sffamily, text width=1.7cm, align=center] at (-3, 2.3) {PyTorch\\KD};
+\node[font=\tiny\sffamily, text width=1.7cm, align=center] at (-0.8, 2.3) {INT8/4\\Pruning};
+\node[font=\tiny\sffamily, text width=1.7cm, align=center] at (1.4, 2.3) {TVM\\MLIR\\XLA};
+\node[font=\tiny\sffamily, text width=1.7cm, align=center] at (3.6, 2.3) {Drift\\Telemetry};
+
+\node[component=pythonblue!40, minimum width=8cm, minimum height=0.5cm] (cli) at (0, 1.7) {\scriptsize \texttt{edgeai} CLI Tool};
+
+% EdgeIR Layer
+\node[component=edgeirpurple!30, minimum width=8cm] (edgeir) at (0, 0.8) {EdgeIR};
+\node[font=\tiny\sffamily, below=0.05cm of edgeir.north] {Optimization • Fusion • Layout Transform • FlatBuffers};
+
+% C++ Runtime Layer
+\begin{scope}[on background layer]
+\node[fill=cppgreen!10, rounded corners, fit={(-4.5, -1.2) (4.5, 0.2)}] (cppbg) {};
+\end{scope}
+\node[labelbox=cppgreen] at (-3.5, 0.3) {C++ RUNTIME};
+
+\node[component=cppgreen!40, minimum width=2.5cm] (executor) at (-2.5, -0.5) {\scriptsize Graph Executor};
+\node[component=cppgreen!40, minimum width=2.5cm] (kernels) at (0.5, -0.5) {\scriptsize Opt. Kernels};
+\node[component=cppgreen!40, minimum width=2.5cm] (io) at (3.5, -0.5) {\scriptsize I/O \& Sensors};
+
+\node[font=\tiny\sffamily] at (-2.5, -0.85) {Memory Planning};
+\node[font=\tiny\sffamily] at (0.5, -0.85) {INT8/4 • NEON};
+\node[font=\tiny\sffamily] at (3.5, -0.85) {DMA • Camera};
+
+% Mojo Performance Layer
+\node[component=mojoOrange!30, minimum width=3cm] (mojo) at (-2.5, -1.8) {Mojo Kernels};
+\node[font=\tiny\sffamily, below=0.05cm of mojo.north] {MLIR • SIMD};
+
+% Hardware Abstraction Layer
+\node[component=gray!30, minimum width=8cm, minimum height=0.6cm] (hal) at (0, -2.8) {Hardware Abstraction Layer};
+\node[font=\tiny\sffamily, below=0.08cm of hal.north] {CPU (NEON) • CUDA • NPU • DSP};
+
+% Target Devices
+\node[component=gray!50, minimum width=1.6cm, minimum height=0.5cm] (m7) at (-3.2, -3.8) {\scriptsize Cortex-M7};
+\node[component=gray!50, minimum width=1.6cm, minimum height=0.5cm] (rpi) at (-1.1, -3.8) {\scriptsize RPi 4};
+\node[component=gray!50, minimum width=1.6cm, minimum height=0.5cm] (jetson) at (1, -3.8) {\scriptsize Jetson};
+\node[component=gray!50, minimum width=1.6cm, minimum height=0.5cm] (coral) at (3.1, -3.8) {\scriptsize Coral};
+
+% Arrows - showing data flow
+\draw[arrow] (apps) -- (cards);
+\draw[arrow] (cards) -- (train);
+\draw[arrow] (train) -- (compress);
+\draw[arrow] (compress) -- (compile);
+\draw[arrow] (compile) -- (edgeir);
+\draw[arrow] (monitor) -- (edgeir);
+\draw[arrow] (edgeir) -- (executor);
+\draw[arrow] (executor) -- (hal);
+\draw[arrow] (kernels) -- (hal);
+\draw[arrow] (mojo) -- (kernels);
+\draw[arrow, dashed] (hal) -- (m7);
+\draw[arrow, dashed] (hal) -- (rpi);
+\draw[arrow, dashed] (hal) -- (jetson);
+\draw[arrow, dashed] (hal) -- (coral);
+
+% Side labels for language layers
+\node[rotate=90, font=\scriptsize\sffamily, text=pythonblue] at (-5.2, 2.5) {Training \& Tooling};
+\node[rotate=90, font=\scriptsize\sffamily, text=cppgreen] at (-5.2, -0.5) {Embedded Runtime};
+\node[rotate=90, font=\scriptsize\sffamily, text=mojoOrange] at (-5.2, -1.8) {Performance};
+
+\end{tikzpicture}

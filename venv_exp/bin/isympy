@@ -1,0 +1,6 @@
+#!/home/malak/alnemari_lab/08_rdia_collaborations/malak_platform/venv_exp/bin/python3
+import sys
+from isympy import main
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(main())

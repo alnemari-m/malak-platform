@@ -1,0 +1,44 @@
+# Renode Platform Configuration for Raspberry Pi 3
+# ARM Cortex-A53 @ 1.2 GHz, 1 GB RAM
+# Used for Malak Platform edge AI validation
+
+# Create machine
+mach create "rpi3_cifar10"
+
+# Load Raspberry Pi 3 platform description
+machine LoadPlatformDescription @platforms/cpus/bcm2837.repl
+
+# Configure CPU (4-core Cortex-A53)
+sysbus.cpu MaximumBlockSize 1
+sysbus.cpu PerformanceInMips 1200
+
+# Note: Performance profiling can be enabled separately if needed
+
+# Load compiled binary (using same binary as STM32H7 for now)
+$bin=@../models/cifar10_demo.elf
+showAnalyzer sysbus.uart0
+
+# Load the binary
+sysbus LoadELF $bin
+
+# Set up logging
+logLevel 0
+
+# Display configuration
+log "================================================"
+log "Raspberry Pi 3 Simulation - Malak Platform"
+log "================================================"
+log "CPU: ARM Cortex-A53 (quad-core) @ 1.2 GHz"
+log "RAM: 1 GB"
+log "Binary: $bin"
+log "================================================"
+log ""
+
+# Start simulation
+start
+
+# Wait for completion
+sleep 5
+
+# Stop simulation
+quit

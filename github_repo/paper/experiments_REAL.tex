@@ -1,0 +1,192 @@
+\section{Experimental Setup}
+
+This section details the experimental configuration for validating Malak Platform on the CIFAR-10 image classification benchmark.
+
+\subsection{Application: CIFAR-10 Image Classification}
+
+\subsubsection{Task Description}
+Object classification in natural images for edge device deployment. This benchmark validates the platform's ability to train, compress, and deploy vision models efficiently on resource-constrained devices.
+
+\subsubsection{Dataset}
+\begin{itemize}
+\item \textbf{Source}: CIFAR-10 dataset \cite{cifar10}
+\item \textbf{Size}: 50,000 training images, 10,000 test images
+\item \textbf{Classes}: 10 object categories (airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck)
+\item \textbf{Resolution}: 32$\times$32 RGB images
+\item \textbf{Preprocessing}: Mean-variance normalization using dataset statistics
+\item \textbf{Augmentation}: Random horizontal flip, random crop with 4-pixel padding
+\end{itemize}
+
+\subsubsection{Model Architecture}
+\begin{itemize}
+\item \textbf{Baseline}: MobileNetV2 architecture adapted for CIFAR-10
+\item \textbf{Parameters}: 2,236,682 (approximately 2.2M)
+\item \textbf{Modifications}: Adjusted first convolutional layer for 32$\times$32 input, modified classifier for 10 classes
+\item \textbf{Model size (FP32)}: 8.76 MB
+\end{itemize}
+
+\subsubsection{Training Configuration}
+\begin{verbatim}
+Optimizer: SGD (lr=0.01, momentum=0.9,
+           weight_decay=5e-4)
+Batch size: 128
+Epochs: 100
+Learning rate schedule: Cosine annealing
+Augmentation: Random horizontal flip,
+              random crop (padding=4)
+Device: CPU (Intel/AMD x86_64)
+\end{verbatim}
+
+\subsubsection{Compression Pipeline}
+
+We evaluate the following compression strategies:
+
+\textbf{Post-Training Quantization (PTQ)}:
+\begin{itemize}
+\item Dynamic INT8 quantization of linear and convolutional layers
+\item No retraining required
+\item Applied using PyTorch's native quantization API
+\end{itemize}
+
+\textbf{Quantization-Aware Training (QAT)}:
+\begin{itemize}
+\item Simulated quantization during training
+\item Model adapts to reduced precision
+\item Additional 20 fine-tuning epochs with reduced learning rate
+\end{itemize}
+
+\subsection{Evaluation Metrics}
+
+\subsubsection{Accuracy Metrics}
+\begin{itemize}
+\item \textbf{Top-1 Accuracy}: Percentage of correctly classified test images
+\item \textbf{Accuracy Degradation}: Percentage point difference from FP32 baseline
+\end{itemize}
+
+\subsubsection{Efficiency Metrics}
+\begin{itemize}
+\item \textbf{Model Size}: Storage required for model weights (MB)
+\item \textbf{Compression Ratio}: FP32 size divided by compressed size
+\item \textbf{Inference Latency}: Average milliseconds per image (averaged over 10,000 test images)
+\item \textbf{Parameters}: Total trainable parameters in the model
+\end{itemize}
+
+\subsection{Hardware Platform}
+
+Experiments were conducted on:
+\begin{itemize}
+\item \textbf{CPU}: x86\_64 architecture
+\item \textbf{Framework}: PyTorch 2.10.0
+\item \textbf{Python}: 3.11
+\item \textbf{Operating System}: Linux
+\end{itemize}
+
+\subsection{Baseline Comparisons}
+
+We evaluate Malak Platform's compression pipeline against:
+\begin{itemize}
+\item \textbf{FP32 Baseline}: Uncompressed full-precision model
+\item \textbf{INT8 PTQ}: Post-training dynamic quantization
+\item \textbf{INT8 QAT}: Quantization-aware training (estimated)
+\end{itemize}
+
+\subsection{Reproducibility}
+
+To ensure reproducibility:
+\begin{itemize}
+\item \textbf{Public dataset}: CIFAR-10 is freely available and widely used
+\item \textbf{Standard architecture}: MobileNetV2 is a well-established model
+\item \textbf{Fixed random seed}: Set to 42 for consistent results
+\item \textbf{Documented pipeline}: Complete training script provided in repository
+\item \textbf{Hyperparameters}: All settings explicitly specified
+\end{itemize}
+
+Researchers can replicate experiments using:
+\begin{verbatim}
+git clone https://github.com/alnemari-m/malak_platform
+cd malak_platform
+python simple_experiment.py
+\end{verbatim}
+
+\subsection{Embedded Hardware Validation}
+
+We validate the platform's embedded deployment capabilities through cross-compilation to ARM targets and Renode simulation~\cite{renode}.
+
+\subsubsection{Validation Methodology}
+
+Our embedded validation consists of:
+
+\begin{enumerate}
+\item \textbf{Complete ARM Implementation}: Full bare-metal binary with vector table, reset handler, and system initialization for STM32H7
+
+\item \textbf{Cross-Compilation}: Compiled with ARM GCC 14.2.0 using \texttt{-mcpu=cortex-m7 -O3} optimization flags
+
+\item \textbf{Resource Verification}: Static analysis of flash and RAM usage through linker memory reports
+
+\item \textbf{Renode Simulation}: Functional execution validation on simulated STM32H7 platform
+\end{enumerate}
+
+\subsubsection{Target Platform}
+
+\textbf{STM32H7 Microcontroller}: ARM Cortex-M7 @ 480 MHz, 1 MB RAM, 2 MB Flash. Representative of resource-constrained edge devices for IoT, wearable, and industrial applications.
+
+\subsection{Cross-Dataset Validation}
+
+To demonstrate platform generalization, we conduct additional validation on Fashion-MNIST~\cite{fashion_mnist}.
+
+\subsubsection{Fashion-MNIST Dataset}
+\begin{itemize}
+\item \textbf{Source}: Fashion-MNIST benchmark dataset
+\item \textbf{Size}: 60,000 training images, 10,000 test images
+\item \textbf{Classes}: 10 clothing categories
+\item \textbf{Resolution}: 28$\times$28 grayscale images
+\item \textbf{Preprocessing}: Normalization using dataset statistics
+\end{itemize}
+
+\subsubsection{Model and Training}
+\begin{itemize}
+\item \textbf{Architecture}: SimpleCNN (3 conv layers, 2 FC layers)
+\item \textbf{Parameters}: 458,570
+\item \textbf{Optimizer}: Adam (lr=0.001)
+\item \textbf{Epochs}: 20
+\item \textbf{Compression}: Dynamic INT8 quantization
+\end{itemize}
+
+This additional dataset validates that the platform's compression pipeline generalizes beyond CIFAR-10 to different image domains (color → grayscale) and architectures (MobileNetV2 → SimpleCNN).
+
+\subsection{Architecture Generalization}
+
+To validate that the platform's compression pipeline works across diverse neural network architectures, we conduct comprehensive testing on three representative architectures with different complexity levels.
+
+\subsubsection{Architecture Selection}
+
+We evaluate the following architectures on CIFAR-10:
+
+\begin{enumerate}
+\item \textbf{MobileNetV2} (2.24M parameters): Efficient architecture designed for mobile/edge devices using depthwise separable convolutions
+
+\item \textbf{ResNet18} (11.17M parameters): Deep residual network with skip connections, adapted for CIFAR-10 with modified first convolutional layer and removed max pooling
+
+\item \textbf{EfficientNet-B0} (4.02M parameters): Compound-scaled architecture balancing depth, width, and resolution
+\end{enumerate}
+
+\subsubsection{Training Configuration}
+
+All architectures trained with consistent settings:
+\begin{itemize}
+\item \textbf{Dataset}: CIFAR-10 (same train/test split)
+\item \textbf{Optimizer}: Adam (lr=0.001)
+\item \textbf{Batch size}: 128
+\item \textbf{Epochs}: 50
+\item \textbf{Augmentation}: Random horizontal flip, random crop
+\item \textbf{Compression}: Dynamic INT8 quantization
+\end{itemize}
+
+\subsubsection{Validation Objective}
+
+This experiment demonstrates:
+\begin{itemize}
+\item Platform works across parameter ranges (2.24M to 11.17M)
+\item Quantization robustness for different architectural patterns
+\item Generalization from lightweight (MobileNetV2) to standard (ResNet18) to efficient (EfficientNet-B0) designs
+\end{itemize}

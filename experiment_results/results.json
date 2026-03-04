@@ -1,0 +1,28 @@
+{
+  "dataset": {
+    "name": "CIFAR-10",
+    "train_size": 50000,
+    "test_size": 10000,
+    "classes": 10,
+    "resolution": "32\u00d732 RGB"
+  },
+  "model": {
+    "architecture": "MobileNetV2",
+    "parameters": 2236682,
+    "fp32_size_mb": 8.76380443572998,
+    "int8_size_mb": 8.727742195129395,
+    "compression_ratio": 1.0041319094668848
+  },
+  "accuracy": {
+    "fp32_baseline": 89.28,
+    "int8_ptq": 89.26,
+    "int8_qat": 88.78,
+    "ptq_degradation": 0.01999999999999602,
+    "qat_degradation": 0.5
+  },
+  "performance": {
+    "fp32_latency_ms": 0.6668917080269584,
+    "int8_latency_ms": 0.6682550228094752,
+    "speedup": 0.9979598884617654
+  }
+}

@@ -1,0 +1,14 @@
+\begin{table}[h]
+\centering
+\caption{Architecture Comparison on CIFAR-10 with INT8 Quantization}
+\label{tab:architecture_comparison}
+\begin{tabular}{lccccc}
+\hline
+\textbf{Architecture} & \textbf{Parameters} & \textbf{FP32 Acc.} & \textbf{INT8 Acc.} & \textbf{$\Delta$ Acc.} & \textbf{Size (MB)} \\
+\hline
+MobileNetV2 & 2.24M & 89.28\% & 88.78\% & 0.50\% & 8.76 \\
+ResNet18 & 11.17M & 91.78\% & 91.78\% & 0.00\% & 42.70 \\
+EfficientNet-B0 & 4.02M & 81.26\% & 81.26\% & 0.00\% & 15.62 \\
+\hline
+\end{tabular}
+\end{table}

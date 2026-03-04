@@ -1,0 +1,13 @@
+\begin{table}[h]
+\centering
+\caption{Performance Comparison Across Datasets}
+\label{tab:performance_comparison}
+\begin{tabular}{lccccc}
+\hline
+\textbf{Dataset} & \textbf{Model} & \textbf{Params} & \textbf{FP32 Lat} & \textbf{INT8 Lat} & \textbf{Speedup} \\
+\hline
+CIFAR-10 & MobileNetV2 & 2.2M & 0.67 ms & 0.67 ms & 1.00$\times$ \\
+Fashion-MNIST & SimpleCNN & 459K & 10.16 ms & 9.91 ms & 1.03$\times$ \\
+\hline
+\end{tabular}
+\end{table}

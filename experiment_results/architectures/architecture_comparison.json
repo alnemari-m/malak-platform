@@ -1,0 +1,30 @@
+{
+  "ResNet18": {
+    "parameters": 11173962,
+    "fp32": {
+      "accuracy": 91.78,
+      "latency_ms": 273.3879119535036,
+      "model_size_mb": 42.70063304901123
+    },
+    "int8": {
+      "accuracy": 91.78,
+      "latency_ms": 273.3879119535036,
+      "model_size_mb": 42.70063304901123,
+      "accuracy_drop": 0.0
+    }
+  },
+  "EfficientNet-B0": {
+    "parameters": 4020358,
+    "fp32": {
+      "accuracy": 81.26,
+      "latency_ms": 111.05493352382997,
+      "model_size_mb": 15.621270179748535
+    },
+    "int8": {
+      "accuracy": 81.26,
+      "latency_ms": 111.05493352382997,
+      "model_size_mb": 15.621270179748535,
+      "accuracy_drop": 0.0
+    }
+  }
+}

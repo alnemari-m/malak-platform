@@ -1,0 +1,50 @@
+# Renode Platform Configuration for STM32H7
+# ARM Cortex-M7 @ 480 MHz, 1 MB RAM
+# Used for Malak Platform edge AI validation
+
+# Create machine
+mach create "stm32h7_cifar10"
+
+# Load STM32H7 platform description
+machine LoadPlatformDescription @platforms/cpus/stm32h743.repl
+
+# Configure CPU
+sysbus.cpu MaximumBlockSize 1
+sysbus.cpu PerformanceInMips 480
+
+# Configure memory
+# STM32H7 has 1 MB RAM, 2 MB Flash
+# Our model needs ~384 KB RAM
+
+# Note: Performance profiling can be enabled separately if needed
+
+# Load compiled binary
+$bin=@../models/cifar10_demo.elf
+showAnalyzer sysbus.usart1
+
+# Load the binary
+sysbus LoadELF $bin
+
+# Set up logging
+logLevel 0
+
+# Display configuration
+log "================================================"
+log "STM32H7 Simulation - Malak Platform Validation"
+log "================================================"
+log "CPU: ARM Cortex-M7 @ 480 MHz"
+log "RAM: 1 MB"
+log "Flash: 2 MB"
+log "Binary: $bin"
+log "================================================"
+log ""
+
+# Start simulation
+start
+
+# Wait for completion (adjust timeout as needed)
+# Typical inference time: 10-50ms, so 10 seconds is safe
+sleep 10
+
+# Stop simulation
+quit

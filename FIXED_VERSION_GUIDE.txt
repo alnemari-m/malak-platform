@@ -1,0 +1,138 @@
+╔══════════════════════════════════════════════════════════════════╗
+║               MALAK PLATFORM PAPER - FIXED VERSION ✅            ║
+╚══════════════════════════════════════════════════════════════════╝
+
+🔧 PROBLEMS FIXED:
+
+   1. ✅ Removed standalone \documentclass from TikZ figures
+      • TikZ files now work with \input command
+      • No more "Can be used only in preamble" errors
+      
+   2. ✅ Cleaned Unicode characters from abstract
+      • Removed hidden U+0014 control characters
+      • Fixed em-dashes (--- instead of special chars)
+      
+   3. ✅ Created new main_fixed.tex with proper setup
+      • All TikZ packages loaded correctly
+      • PGFPlots configured properly
+
+📦 NEW ZIP FILE:
+   Location: malak_paper_FIXED.zip
+   Size: 43 KB
+
+📁 WHAT'S INCLUDED:
+
+   Main Document:
+   └── main_fixed.tex ⭐ USE THIS as main document!
+
+   Abstract & Intro (choose one style):
+   ├── abstract_humanized.tex (conversational)
+   ├── abstract_clean.tex (traditional - no Unicode errors!)
+   ├── introduction_humanized.tex (engaging)
+   └── introduction.tex (traditional)
+
+   All Other Sections:
+   ├── related_work.tex
+   ├── methodology.tex
+   ├── architecture.tex (updated to use fixed figures)
+   ├── experiments.tex
+   ├── results.tex (updated to use fixed figures)
+   ├── discussion.tex
+   ├── conclusion.tex
+   └── references.bib
+
+   TikZ Figures (FIXED - work with \input):
+   ├── platform_architecture_fixed.tex ⭐
+   ├── jellyfish_latency_fixed.tex ⭐
+   ├── neuro_performance_fixed.tex ⭐
+   └── pareto_frontier_fixed.tex ⭐
+
+🚀 UPLOAD TO OVERLEAF:
+
+   1. Go to https://www.overleaf.com
+   2. New Project → Upload Project
+   3. Select: malak_paper_FIXED.zip
+   4. Wait for upload to complete
+
+⚙️  CRITICAL SETTINGS IN OVERLEAF:
+
+   1. Click menu (☰) in top-left
+   2. Set "Main document" to: main_fixed.tex
+   3. Set "Compiler" to: pdfLaTeX  
+   4. Set "TeX Live version" to: 2024 or 2025
+   5. Click "Recompile"
+
+✅ SHOULD COMPILE SUCCESSFULLY NOW!
+
+   Expected compile time: 30-60 seconds first time
+   Subsequent compiles: 10-20 seconds
+
+🎯 WHAT WAS CHANGED:
+
+   OLD TikZ files had:
+   \documentclass[tikz,border=10pt]{standalone}
+   \usepackage{...}
+   \begin{document}
+   ...
+   \end{document}
+   
+   NEW TikZ files have:
+   % Just the TikZ picture environment
+   \begin{tikzpicture}
+   ...
+   \end{tikzpicture}
+   
+   This works with \input in the main document!
+
+📝 DEFAULT WRITING STYLE:
+
+   main_fixed.tex is set to use HUMANIZED style by default:
+   • abstract_humanized.tex
+   • introduction_humanized.tex
+   
+   To switch to TRADITIONAL style:
+   1. Open main_fixed.tex in Overleaf
+   2. Find lines 28-34
+   3. Comment out humanized, uncomment traditional:
+   
+      % \input{abstract_humanized}
+      % \input{introduction_humanized}
+      \input{abstract_clean}
+      \input{introduction}
+
+🎨 FIGURES WILL RENDER AS:
+
+   ✓ Platform Architecture - Multi-layer system diagram
+   ✓ Jellyfish Latency - Performance bar chart  
+   ✓ Neuro Performance - Medical app benchmark
+   ✓ Pareto Frontier - Accuracy-latency plot
+   
+   All in beautiful vector graphics!
+
+⚠️  TROUBLESHOOTING:
+
+   If you still see errors:
+   
+   1. Make sure main document is set to main_fixed.tex
+   2. Check that compiler is pdfLaTeX (not XeLaTeX or LuaLaTeX)
+   3. TeX Live version should be 2024 or 2025
+   4. If timeout, just click "Recompile" again
+   
+   First compile can take 60 seconds - this is normal for TikZ!
+
+📊 WHAT YOU'LL GET:
+
+   • Complete 10-section paper
+   • 4 professional TikZ figures
+   • 40+ quality references
+   • IEEE conference format
+   • 6-8 pages (estimated)
+   • Publication-ready!
+
+═══════════════════════════════════════════════════════════════════
+
+🎉 THIS VERSION SHOULD COMPILE WITHOUT ERRORS!
+
+Upload malak_paper_FIXED.zip to Overleaf and you're done! 🚀
+
+═══════════════════════════════════════════════════════════════════

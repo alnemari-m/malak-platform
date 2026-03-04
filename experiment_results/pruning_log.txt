@@ -1,0 +1,866 @@
+/home/malak/anaconda3/lib/python3.11/site-packages/torchvision/models/_utils.py:208: UserWarning: The parameter 'pretrained' is deprecated since 0.13 and may be removed in the future, please use 'weights' instead.
+  warnings.warn(
+/home/malak/anaconda3/lib/python3.11/site-packages/torchvision/models/_utils.py:223: UserWarning: Arguments other than a weight enum or `None` for 'weights' are deprecated since 0.13 and may be removed in the future. The current behavior is equivalent to passing `weights=None`.
+  warnings.warn(msg)
+======================================================================
+MALAK PLATFORM - SIMPLE BENCHMARK EXPERIMENT
+Dataset: CIFAR-10
+Model: MobileNetV2
+======================================================================
+
+Device: cuda
+Batch size: 128
+Training epochs (FP32): 100
+Training epochs (QAT): 20
+
+======================================================================
+LOADING CIFAR-10 DATASET
+======================================================================
+Training samples: 50000
+Test samples: 10000
+Classes: ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+
+======================================================================
+CREATING MODEL
+======================================================================
+Model: MobileNetV2 (modified for CIFAR-10)
+Total parameters: 2,236,682
+Estimated FP32 size: 8.53 MB
+
+======================================================================
+TRAINING FP32 BASELINE
+======================================================================
+
+Epoch 1/100
+  Batch [0/391] Loss: 2.354 Acc: 5.47%
+  Batch [100/391] Loss: 2.155 Acc: 17.47%
+  Batch [200/391] Loss: 1.994 Acc: 24.45%
+  Batch [300/391] Loss: 1.893 Acc: 28.40%
+Train Acc: 30.98% | Test Acc: 44.23%
+✓ Saved best model (acc: 44.23%)
+
+Epoch 2/100
+  Batch [0/391] Loss: 1.725 Acc: 38.28%
+  Batch [100/391] Loss: 1.537 Acc: 43.69%
+  Batch [200/391] Loss: 1.511 Acc: 44.72%
+  Batch [300/391] Loss: 1.484 Acc: 45.83%
+Train Acc: 47.02% | Test Acc: 51.78%
+✓ Saved best model (acc: 51.78%)
+
+Epoch 3/100
+  Batch [0/391] Loss: 1.191 Acc: 53.12%
+  Batch [100/391] Loss: 1.294 Acc: 52.50%
+  Batch [200/391] Loss: 1.281 Acc: 53.49%
+  Batch [300/391] Loss: 1.269 Acc: 54.12%
+Train Acc: 54.80% | Test Acc: 59.03%
+✓ Saved best model (acc: 59.03%)
+
+Epoch 4/100
+  Batch [0/391] Loss: 1.245 Acc: 54.69%
+  Batch [100/391] Loss: 1.144 Acc: 59.48%
+  Batch [200/391] Loss: 1.135 Acc: 59.88%
+  Batch [300/391] Loss: 1.124 Acc: 60.26%
+Train Acc: 60.81% | Test Acc: 61.31%
+✓ Saved best model (acc: 61.31%)
+
+Epoch 5/100
+  Batch [0/391] Loss: 0.861 Acc: 67.19%
+  Batch [100/391] Loss: 1.025 Acc: 63.42%
+  Batch [200/391] Loss: 1.024 Acc: 63.56%
+  Batch [300/391] Loss: 1.007 Acc: 64.41%
+Train Acc: 64.68% | Test Acc: 66.90%
+✓ Saved best model (acc: 66.90%)
+
+Epoch 6/100
+  Batch [0/391] Loss: 0.968 Acc: 65.62%
+  Batch [100/391] Loss: 0.928 Acc: 67.19%
+  Batch [200/391] Loss: 0.925 Acc: 67.24%
+  Batch [300/391] Loss: 0.917 Acc: 67.55%
+Train Acc: 67.75% | Test Acc: 68.20%
+✓ Saved best model (acc: 68.20%)
+
+Epoch 7/100
+  Batch [0/391] Loss: 0.837 Acc: 74.22%
+  Batch [100/391] Loss: 0.857 Acc: 69.73%
+  Batch [200/391] Loss: 0.844 Acc: 70.15%
+  Batch [300/391] Loss: 0.840 Acc: 70.17%
+Train Acc: 70.36% | Test Acc: 71.95%
+✓ Saved best model (acc: 71.95%)
+
+Epoch 8/100
+  Batch [0/391] Loss: 0.776 Acc: 67.97%
+  Batch [100/391] Loss: 0.794 Acc: 71.87%
+  Batch [200/391] Loss: 0.785 Acc: 72.19%
+  Batch [300/391] Loss: 0.782 Acc: 72.26%
+Train Acc: 72.61% | Test Acc: 75.26%
+✓ Saved best model (acc: 75.26%)
+
+Epoch 9/100
+  Batch [0/391] Loss: 0.805 Acc: 70.31%
+  Batch [100/391] Loss: 0.739 Acc: 73.99%
+  Batch [200/391] Loss: 0.729 Acc: 74.57%
+  Batch [300/391] Loss: 0.728 Acc: 74.70%
+Train Acc: 74.66% | Test Acc: 75.80%
+✓ Saved best model (acc: 75.80%)
+
+Epoch 10/100
+  Batch [0/391] Loss: 0.717 Acc: 76.56%
+  Batch [100/391] Loss: 0.666 Acc: 76.59%
+  Batch [200/391] Loss: 0.672 Acc: 76.49%
+  Batch [300/391] Loss: 0.673 Acc: 76.47%
+Train Acc: 76.35% | Test Acc: 75.47%
+
+Epoch 11/100
+  Batch [0/391] Loss: 0.662 Acc: 75.78%
+  Batch [100/391] Loss: 0.638 Acc: 77.68%
+  Batch [200/391] Loss: 0.644 Acc: 77.55%
+  Batch [300/391] Loss: 0.642 Acc: 77.70%
+Train Acc: 77.57% | Test Acc: 77.23%
+✓ Saved best model (acc: 77.23%)
+
+Epoch 12/100
+  Batch [0/391] Loss: 0.587 Acc: 78.12%
+  Batch [100/391] Loss: 0.598 Acc: 78.88%
+  Batch [200/391] Loss: 0.608 Acc: 78.47%
+  Batch [300/391] Loss: 0.605 Acc: 78.72%
+Train Acc: 78.69% | Test Acc: 78.84%
+✓ Saved best model (acc: 78.84%)
+
+Epoch 13/100
+  Batch [0/391] Loss: 0.660 Acc: 77.34%
+  Batch [100/391] Loss: 0.592 Acc: 79.51%
+  Batch [200/391] Loss: 0.581 Acc: 79.78%
+  Batch [300/391] Loss: 0.583 Acc: 79.67%
+Train Acc: 79.61% | Test Acc: 79.47%
+✓ Saved best model (acc: 79.47%)
+
+Epoch 14/100
+  Batch [0/391] Loss: 0.595 Acc: 78.12%
+  Batch [100/391] Loss: 0.553 Acc: 80.74%
+  Batch [200/391] Loss: 0.562 Acc: 80.32%
+  Batch [300/391] Loss: 0.559 Acc: 80.46%
+Train Acc: 80.49% | Test Acc: 80.30%
+✓ Saved best model (acc: 80.30%)
+
+Epoch 15/100
+  Batch [0/391] Loss: 0.627 Acc: 78.12%
+  Batch [100/391] Loss: 0.552 Acc: 80.82%
+  Batch [200/391] Loss: 0.545 Acc: 81.03%
+  Batch [300/391] Loss: 0.544 Acc: 81.07%
+Train Acc: 80.99% | Test Acc: 80.88%
+✓ Saved best model (acc: 80.88%)
+
+Epoch 16/100
+  Batch [0/391] Loss: 0.453 Acc: 85.94%
+  Batch [100/391] Loss: 0.509 Acc: 82.18%
+  Batch [200/391] Loss: 0.514 Acc: 81.86%
+  Batch [300/391] Loss: 0.521 Acc: 81.74%
+Train Acc: 81.75% | Test Acc: 80.36%
+
+Epoch 17/100
+  Batch [0/391] Loss: 0.453 Acc: 84.38%
+  Batch [100/391] Loss: 0.497 Acc: 82.63%
+  Batch [200/391] Loss: 0.497 Acc: 82.59%
+  Batch [300/391] Loss: 0.502 Acc: 82.41%
+Train Acc: 82.43% | Test Acc: 81.88%
+✓ Saved best model (acc: 81.88%)
+
+Epoch 18/100
+  Batch [0/391] Loss: 0.506 Acc: 81.25%
+  Batch [100/391] Loss: 0.480 Acc: 83.60%
+  Batch [200/391] Loss: 0.480 Acc: 83.36%
+  Batch [300/391] Loss: 0.482 Acc: 83.18%
+Train Acc: 83.13% | Test Acc: 82.22%
+✓ Saved best model (acc: 82.22%)
+
+Epoch 19/100
+  Batch [0/391] Loss: 0.465 Acc: 82.03%
+  Batch [100/391] Loss: 0.463 Acc: 83.75%
+  Batch [200/391] Loss: 0.467 Acc: 83.58%
+  Batch [300/391] Loss: 0.472 Acc: 83.51%
+Train Acc: 83.56% | Test Acc: 81.22%
+
+Epoch 20/100
+  Batch [0/391] Loss: 0.367 Acc: 90.62%
+  Batch [100/391] Loss: 0.447 Acc: 84.54%
+  Batch [200/391] Loss: 0.456 Acc: 84.27%
+  Batch [300/391] Loss: 0.454 Acc: 84.42%
+Train Acc: 84.20% | Test Acc: 82.56%
+✓ Saved best model (acc: 82.56%)
+
+Epoch 21/100
+  Batch [0/391] Loss: 0.532 Acc: 80.47%
+  Batch [100/391] Loss: 0.438 Acc: 84.64%
+  Batch [200/391] Loss: 0.443 Acc: 84.39%
+  Batch [300/391] Loss: 0.447 Acc: 84.33%
+Train Acc: 84.33% | Test Acc: 81.72%
+
+Epoch 22/100
+  Batch [0/391] Loss: 0.350 Acc: 87.50%
+  Batch [100/391] Loss: 0.427 Acc: 85.09%
+  Batch [200/391] Loss: 0.433 Acc: 85.03%
+  Batch [300/391] Loss: 0.432 Acc: 84.92%
+Train Acc: 84.94% | Test Acc: 82.10%
+
+Epoch 23/100
+  Batch [0/391] Loss: 0.300 Acc: 89.06%
+  Batch [100/391] Loss: 0.417 Acc: 85.41%
+  Batch [200/391] Loss: 0.420 Acc: 85.39%
+  Batch [300/391] Loss: 0.423 Acc: 85.36%
+Train Acc: 85.45% | Test Acc: 84.34%
+✓ Saved best model (acc: 84.34%)
+
+Epoch 24/100
+  Batch [0/391] Loss: 0.421 Acc: 85.16%
+  Batch [100/391] Loss: 0.406 Acc: 85.71%
+  Batch [200/391] Loss: 0.405 Acc: 85.72%
+  Batch [300/391] Loss: 0.408 Acc: 85.60%
+Train Acc: 85.53% | Test Acc: 83.35%
+
+Epoch 25/100
+  Batch [0/391] Loss: 0.432 Acc: 83.59%
+  Batch [100/391] Loss: 0.398 Acc: 86.18%
+  Batch [200/391] Loss: 0.403 Acc: 86.01%
+  Batch [300/391] Loss: 0.400 Acc: 86.09%
+Train Acc: 86.02% | Test Acc: 83.93%
+
+Epoch 26/100
+  Batch [0/391] Loss: 0.411 Acc: 84.38%
+  Batch [100/391] Loss: 0.376 Acc: 86.80%
+  Batch [200/391] Loss: 0.383 Acc: 86.59%
+  Batch [300/391] Loss: 0.387 Acc: 86.51%
+Train Acc: 86.37% | Test Acc: 83.59%
+
+Epoch 27/100
+  Batch [0/391] Loss: 0.331 Acc: 88.28%
+  Batch [100/391] Loss: 0.370 Acc: 87.07%
+  Batch [200/391] Loss: 0.371 Acc: 87.10%
+  Batch [300/391] Loss: 0.378 Acc: 86.83%
+Train Acc: 86.71% | Test Acc: 82.63%
+
+Epoch 28/100
+  Batch [0/391] Loss: 0.396 Acc: 85.94%
+  Batch [100/391] Loss: 0.365 Acc: 87.28%
+  Batch [200/391] Loss: 0.370 Acc: 87.17%
+  Batch [300/391] Loss: 0.371 Acc: 87.08%
+Train Acc: 86.91% | Test Acc: 84.75%
+✓ Saved best model (acc: 84.75%)
+
+Epoch 29/100
+  Batch [0/391] Loss: 0.380 Acc: 85.94%
+  Batch [100/391] Loss: 0.357 Acc: 87.64%
+  Batch [200/391] Loss: 0.362 Acc: 87.35%
+  Batch [300/391] Loss: 0.366 Acc: 87.24%
+Train Acc: 87.15% | Test Acc: 84.03%
+
+Epoch 30/100
+  Batch [0/391] Loss: 0.256 Acc: 89.84%
+  Batch [100/391] Loss: 0.343 Acc: 88.07%
+  Batch [200/391] Loss: 0.357 Acc: 87.56%
+  Batch [300/391] Loss: 0.353 Acc: 87.76%
+Train Acc: 87.73% | Test Acc: 85.58%
+✓ Saved best model (acc: 85.58%)
+
+Epoch 31/100
+  Batch [0/391] Loss: 0.306 Acc: 88.28%
+  Batch [100/391] Loss: 0.338 Acc: 88.01%
+  Batch [200/391] Loss: 0.339 Acc: 87.95%
+  Batch [300/391] Loss: 0.340 Acc: 87.92%
+Train Acc: 87.82% | Test Acc: 84.23%
+
+Epoch 32/100
+  Batch [0/391] Loss: 0.317 Acc: 89.06%
+  Batch [100/391] Loss: 0.341 Acc: 87.63%
+  Batch [200/391] Loss: 0.333 Acc: 88.10%
+  Batch [300/391] Loss: 0.336 Acc: 88.11%
+Train Acc: 87.98% | Test Acc: 85.47%
+
+Epoch 33/100
+  Batch [0/391] Loss: 0.381 Acc: 85.16%
+  Batch [100/391] Loss: 0.326 Acc: 88.47%
+  Batch [200/391] Loss: 0.326 Acc: 88.44%
+  Batch [300/391] Loss: 0.332 Acc: 88.26%
+Train Acc: 88.24% | Test Acc: 85.54%
+
+Epoch 34/100
+  Batch [0/391] Loss: 0.281 Acc: 90.62%
+  Batch [100/391] Loss: 0.322 Acc: 88.92%
+  Batch [200/391] Loss: 0.325 Acc: 88.81%
+  Batch [300/391] Loss: 0.325 Acc: 88.76%
+Train Acc: 88.54% | Test Acc: 85.50%
+
+Epoch 35/100
+  Batch [0/391] Loss: 0.260 Acc: 91.41%
+  Batch [100/391] Loss: 0.309 Acc: 89.02%
+  Batch [200/391] Loss: 0.317 Acc: 88.85%
+  Batch [300/391] Loss: 0.317 Acc: 88.84%
+Train Acc: 88.85% | Test Acc: 86.01%
+✓ Saved best model (acc: 86.01%)
+
+Epoch 36/100
+  Batch [0/391] Loss: 0.254 Acc: 92.97%
+  Batch [100/391] Loss: 0.296 Acc: 89.87%
+  Batch [200/391] Loss: 0.309 Acc: 89.37%
+  Batch [300/391] Loss: 0.307 Acc: 89.29%
+Train Acc: 89.18% | Test Acc: 86.27%
+✓ Saved best model (acc: 86.27%)
+
+Epoch 37/100
+  Batch [0/391] Loss: 0.196 Acc: 93.75%
+  Batch [100/391] Loss: 0.288 Acc: 89.87%
+  Batch [200/391] Loss: 0.302 Acc: 89.31%
+  Batch [300/391] Loss: 0.307 Acc: 89.28%
+Train Acc: 89.25% | Test Acc: 85.80%
+
+Epoch 38/100
+  Batch [0/391] Loss: 0.209 Acc: 91.41%
+  Batch [100/391] Loss: 0.287 Acc: 89.85%
+  Batch [200/391] Loss: 0.290 Acc: 89.78%
+  Batch [300/391] Loss: 0.293 Acc: 89.69%
+Train Acc: 89.57% | Test Acc: 85.02%
+
+Epoch 39/100
+  Batch [0/391] Loss: 0.273 Acc: 89.06%
+  Batch [100/391] Loss: 0.280 Acc: 90.28%
+  Batch [200/391] Loss: 0.288 Acc: 89.94%
+  Batch [300/391] Loss: 0.292 Acc: 89.76%
+Train Acc: 89.66% | Test Acc: 85.93%
+
+Epoch 40/100
+  Batch [0/391] Loss: 0.228 Acc: 92.97%
+  Batch [100/391] Loss: 0.269 Acc: 90.49%
+  Batch [200/391] Loss: 0.276 Acc: 90.40%
+  Batch [300/391] Loss: 0.278 Acc: 90.17%
+Train Acc: 90.20% | Test Acc: 86.04%
+
+Epoch 41/100
+  Batch [0/391] Loss: 0.280 Acc: 89.84%
+  Batch [100/391] Loss: 0.264 Acc: 90.70%
+  Batch [200/391] Loss: 0.270 Acc: 90.68%
+  Batch [300/391] Loss: 0.275 Acc: 90.48%
+Train Acc: 90.36% | Test Acc: 86.16%
+
+Epoch 42/100
+  Batch [0/391] Loss: 0.242 Acc: 92.19%
+  Batch [100/391] Loss: 0.271 Acc: 90.55%
+  Batch [200/391] Loss: 0.269 Acc: 90.49%
+  Batch [300/391] Loss: 0.268 Acc: 90.52%
+Train Acc: 90.40% | Test Acc: 86.34%
+✓ Saved best model (acc: 86.34%)
+
+Epoch 43/100
+  Batch [0/391] Loss: 0.276 Acc: 92.19%
+  Batch [100/391] Loss: 0.254 Acc: 91.18%
+  Batch [200/391] Loss: 0.264 Acc: 90.76%
+  Batch [300/391] Loss: 0.266 Acc: 90.68%
+Train Acc: 90.62% | Test Acc: 86.55%
+✓ Saved best model (acc: 86.55%)
+
+Epoch 44/100
+  Batch [0/391] Loss: 0.179 Acc: 92.19%
+  Batch [100/391] Loss: 0.251 Acc: 91.14%
+  Batch [200/391] Loss: 0.246 Acc: 91.27%
+  Batch [300/391] Loss: 0.254 Acc: 91.01%
+Train Acc: 90.92% | Test Acc: 86.30%
+
+Epoch 45/100
+  Batch [0/391] Loss: 0.224 Acc: 87.50%
+  Batch [100/391] Loss: 0.244 Acc: 91.55%
+  Batch [200/391] Loss: 0.249 Acc: 91.22%
+  Batch [300/391] Loss: 0.248 Acc: 91.21%
+Train Acc: 91.01% | Test Acc: 85.97%
+
+Epoch 46/100
+  Batch [0/391] Loss: 0.265 Acc: 92.19%
+  Batch [100/391] Loss: 0.238 Acc: 91.46%
+  Batch [200/391] Loss: 0.236 Acc: 91.58%
+  Batch [300/391] Loss: 0.244 Acc: 91.28%
+Train Acc: 91.24% | Test Acc: 87.10%
+✓ Saved best model (acc: 87.10%)
+
+Epoch 47/100
+  Batch [0/391] Loss: 0.158 Acc: 94.53%
+  Batch [100/391] Loss: 0.242 Acc: 91.21%
+  Batch [200/391] Loss: 0.243 Acc: 91.37%
+  Batch [300/391] Loss: 0.243 Acc: 91.42%
+Train Acc: 91.35% | Test Acc: 86.64%
+
+Epoch 48/100
+  Batch [0/391] Loss: 0.270 Acc: 89.06%
+  Batch [100/391] Loss: 0.226 Acc: 91.97%
+  Batch [200/391] Loss: 0.229 Acc: 91.97%
+  Batch [300/391] Loss: 0.230 Acc: 91.90%
+Train Acc: 91.81% | Test Acc: 86.11%
+
+Epoch 49/100
+  Batch [0/391] Loss: 0.294 Acc: 86.72%
+  Batch [100/391] Loss: 0.228 Acc: 91.94%
+  Batch [200/391] Loss: 0.229 Acc: 91.98%
+  Batch [300/391] Loss: 0.227 Acc: 92.04%
+Train Acc: 91.89% | Test Acc: 86.77%
+
+Epoch 50/100
+  Batch [0/391] Loss: 0.226 Acc: 89.06%
+  Batch [100/391] Loss: 0.218 Acc: 92.16%
+  Batch [200/391] Loss: 0.222 Acc: 92.01%
+  Batch [300/391] Loss: 0.225 Acc: 91.96%
+Train Acc: 91.96% | Test Acc: 86.67%
+
+Epoch 51/100
+  Batch [0/391] Loss: 0.280 Acc: 90.62%
+  Batch [100/391] Loss: 0.212 Acc: 92.47%
+  Batch [200/391] Loss: 0.211 Acc: 92.54%
+  Batch [300/391] Loss: 0.218 Acc: 92.27%
+Train Acc: 92.22% | Test Acc: 87.39%
+✓ Saved best model (acc: 87.39%)
+
+Epoch 52/100
+  Batch [0/391] Loss: 0.121 Acc: 96.88%
+  Batch [100/391] Loss: 0.197 Acc: 92.94%
+  Batch [200/391] Loss: 0.202 Acc: 92.81%
+  Batch [300/391] Loss: 0.210 Acc: 92.52%
+Train Acc: 92.45% | Test Acc: 87.74%
+✓ Saved best model (acc: 87.74%)
+
+Epoch 53/100
+  Batch [0/391] Loss: 0.268 Acc: 88.28%
+  Batch [100/391] Loss: 0.188 Acc: 93.40%
+  Batch [200/391] Loss: 0.197 Acc: 93.02%
+  Batch [300/391] Loss: 0.199 Acc: 92.92%
+Train Acc: 92.79% | Test Acc: 87.39%
+
+Epoch 54/100
+  Batch [0/391] Loss: 0.123 Acc: 96.88%
+  Batch [100/391] Loss: 0.181 Acc: 93.88%
+  Batch [200/391] Loss: 0.188 Acc: 93.54%
+  Batch [300/391] Loss: 0.192 Acc: 93.35%
+Train Acc: 93.04% | Test Acc: 87.08%
+
+Epoch 55/100
+  Batch [0/391] Loss: 0.222 Acc: 91.41%
+  Batch [100/391] Loss: 0.186 Acc: 93.54%
+  Batch [200/391] Loss: 0.188 Acc: 93.41%
+  Batch [300/391] Loss: 0.188 Acc: 93.40%
+Train Acc: 93.32% | Test Acc: 87.50%
+
+Epoch 56/100
+  Batch [0/391] Loss: 0.214 Acc: 94.53%
+  Batch [100/391] Loss: 0.178 Acc: 93.87%
+  Batch [200/391] Loss: 0.186 Acc: 93.59%
+  Batch [300/391] Loss: 0.190 Acc: 93.28%
+Train Acc: 93.23% | Test Acc: 87.29%
+
+Epoch 57/100
+  Batch [0/391] Loss: 0.201 Acc: 92.19%
+  Batch [100/391] Loss: 0.168 Acc: 94.06%
+  Batch [200/391] Loss: 0.171 Acc: 93.99%
+  Batch [300/391] Loss: 0.174 Acc: 93.90%
+Train Acc: 93.73% | Test Acc: 88.20%
+✓ Saved best model (acc: 88.20%)
+
+Epoch 58/100
+  Batch [0/391] Loss: 0.153 Acc: 95.31%
+  Batch [100/391] Loss: 0.172 Acc: 93.86%
+  Batch [200/391] Loss: 0.175 Acc: 93.73%
+  Batch [300/391] Loss: 0.179 Acc: 93.69%
+Train Acc: 93.67% | Test Acc: 87.61%
+
+Epoch 59/100
+  Batch [0/391] Loss: 0.182 Acc: 93.75%
+  Batch [100/391] Loss: 0.164 Acc: 94.01%
+  Batch [200/391] Loss: 0.172 Acc: 93.83%
+  Batch [300/391] Loss: 0.174 Acc: 93.79%
+Train Acc: 93.81% | Test Acc: 87.68%
+
+Epoch 60/100
+  Batch [0/391] Loss: 0.258 Acc: 91.41%
+  Batch [100/391] Loss: 0.167 Acc: 94.08%
+  Batch [200/391] Loss: 0.163 Acc: 94.25%
+  Batch [300/391] Loss: 0.164 Acc: 94.21%
+Train Acc: 94.20% | Test Acc: 87.91%
+
+Epoch 61/100
+  Batch [0/391] Loss: 0.181 Acc: 92.97%
+  Batch [100/391] Loss: 0.151 Acc: 94.61%
+  Batch [200/391] Loss: 0.162 Acc: 94.26%
+  Batch [300/391] Loss: 0.161 Acc: 94.30%
+Train Acc: 94.28% | Test Acc: 88.14%
+
+Epoch 62/100
+  Batch [0/391] Loss: 0.105 Acc: 95.31%
+  Batch [100/391] Loss: 0.151 Acc: 94.66%
+  Batch [200/391] Loss: 0.153 Acc: 94.55%
+  Batch [300/391] Loss: 0.154 Acc: 94.51%
+Train Acc: 94.41% | Test Acc: 87.91%
+
+Epoch 63/100
+  Batch [0/391] Loss: 0.099 Acc: 97.66%
+  Batch [100/391] Loss: 0.141 Acc: 95.12%
+  Batch [200/391] Loss: 0.137 Acc: 95.09%
+  Batch [300/391] Loss: 0.142 Acc: 94.93%
+Train Acc: 94.88% | Test Acc: 88.54%
+✓ Saved best model (acc: 88.54%)
+
+Epoch 64/100
+  Batch [0/391] Loss: 0.197 Acc: 92.19%
+  Batch [100/391] Loss: 0.137 Acc: 95.16%
+  Batch [200/391] Loss: 0.135 Acc: 95.20%
+  Batch [300/391] Loss: 0.138 Acc: 95.11%
+Train Acc: 94.95% | Test Acc: 88.24%
+
+Epoch 65/100
+  Batch [0/391] Loss: 0.087 Acc: 96.09%
+  Batch [100/391] Loss: 0.133 Acc: 95.44%
+  Batch [200/391] Loss: 0.135 Acc: 95.35%
+  Batch [300/391] Loss: 0.136 Acc: 95.22%
+Train Acc: 95.25% | Test Acc: 88.21%
+
+Epoch 66/100
+  Batch [0/391] Loss: 0.089 Acc: 96.88%
+  Batch [100/391] Loss: 0.128 Acc: 95.41%
+  Batch [200/391] Loss: 0.129 Acc: 95.48%
+  Batch [300/391] Loss: 0.132 Acc: 95.31%
+Train Acc: 95.26% | Test Acc: 88.49%
+
+Epoch 67/100
+  Batch [0/391] Loss: 0.078 Acc: 97.66%
+  Batch [100/391] Loss: 0.129 Acc: 95.43%
+  Batch [200/391] Loss: 0.126 Acc: 95.43%
+  Batch [300/391] Loss: 0.125 Acc: 95.54%
+Train Acc: 95.54% | Test Acc: 88.61%
+✓ Saved best model (acc: 88.61%)
+
+Epoch 68/100
+  Batch [0/391] Loss: 0.081 Acc: 96.88%
+  Batch [100/391] Loss: 0.109 Acc: 96.12%
+  Batch [200/391] Loss: 0.113 Acc: 96.08%
+  Batch [300/391] Loss: 0.116 Acc: 95.94%
+Train Acc: 95.87% | Test Acc: 88.42%
+
+Epoch 69/100
+  Batch [0/391] Loss: 0.108 Acc: 95.31%
+  Batch [100/391] Loss: 0.112 Acc: 95.98%
+  Batch [200/391] Loss: 0.113 Acc: 96.00%
+  Batch [300/391] Loss: 0.113 Acc: 96.03%
+Train Acc: 95.95% | Test Acc: 88.52%
+
+Epoch 70/100
+  Batch [0/391] Loss: 0.087 Acc: 97.66%
+  Batch [100/391] Loss: 0.108 Acc: 96.44%
+  Batch [200/391] Loss: 0.105 Acc: 96.36%
+  Batch [300/391] Loss: 0.109 Acc: 96.18%
+Train Acc: 96.13% | Test Acc: 88.43%
+
+Epoch 71/100
+  Batch [0/391] Loss: 0.061 Acc: 96.88%
+  Batch [100/391] Loss: 0.104 Acc: 96.21%
+  Batch [200/391] Loss: 0.106 Acc: 96.24%
+  Batch [300/391] Loss: 0.107 Acc: 96.22%
+Train Acc: 96.23% | Test Acc: 88.77%
+✓ Saved best model (acc: 88.77%)
+
+Epoch 72/100
+  Batch [0/391] Loss: 0.101 Acc: 98.44%
+  Batch [100/391] Loss: 0.098 Acc: 96.48%
+  Batch [200/391] Loss: 0.100 Acc: 96.43%
+  Batch [300/391] Loss: 0.101 Acc: 96.38%
+Train Acc: 96.40% | Test Acc: 89.00%
+✓ Saved best model (acc: 89.00%)
+
+Epoch 73/100
+  Batch [0/391] Loss: 0.069 Acc: 97.66%
+  Batch [100/391] Loss: 0.086 Acc: 96.83%
+  Batch [200/391] Loss: 0.093 Acc: 96.65%
+  Batch [300/391] Loss: 0.093 Acc: 96.69%
+Train Acc: 96.69% | Test Acc: 89.02%
+✓ Saved best model (acc: 89.02%)
+
+Epoch 74/100
+  Batch [0/391] Loss: 0.086 Acc: 96.88%
+  Batch [100/391] Loss: 0.079 Acc: 97.05%
+  Batch [200/391] Loss: 0.082 Acc: 97.10%
+  Batch [300/391] Loss: 0.086 Acc: 97.00%
+Train Acc: 96.96% | Test Acc: 89.22%
+✓ Saved best model (acc: 89.22%)
+
+Epoch 75/100
+  Batch [0/391] Loss: 0.042 Acc: 99.22%
+  Batch [100/391] Loss: 0.081 Acc: 97.18%
+  Batch [200/391] Loss: 0.083 Acc: 97.15%
+  Batch [300/391] Loss: 0.085 Acc: 97.06%
+Train Acc: 97.04% | Test Acc: 89.11%
+
+Epoch 76/100
+  Batch [0/391] Loss: 0.080 Acc: 96.88%
+  Batch [100/391] Loss: 0.078 Acc: 97.26%
+  Batch [200/391] Loss: 0.081 Acc: 97.13%
+  Batch [300/391] Loss: 0.081 Acc: 97.14%
+Train Acc: 97.06% | Test Acc: 88.93%
+
+Epoch 77/100
+  Batch [0/391] Loss: 0.054 Acc: 99.22%
+  Batch [100/391] Loss: 0.074 Acc: 97.46%
+  Batch [200/391] Loss: 0.075 Acc: 97.48%
+  Batch [300/391] Loss: 0.075 Acc: 97.41%
+Train Acc: 97.36% | Test Acc: 88.96%
+
+Epoch 78/100
+  Batch [0/391] Loss: 0.048 Acc: 98.44%
+  Batch [100/391] Loss: 0.069 Acc: 97.63%
+  Batch [200/391] Loss: 0.073 Acc: 97.49%
+  Batch [300/391] Loss: 0.073 Acc: 97.50%
+Train Acc: 97.52% | Test Acc: 89.23%
+✓ Saved best model (acc: 89.23%)
+
+Epoch 79/100
+  Batch [0/391] Loss: 0.044 Acc: 97.66%
+  Batch [100/391] Loss: 0.068 Acc: 97.66%
+  Batch [200/391] Loss: 0.067 Acc: 97.67%
+  Batch [300/391] Loss: 0.068 Acc: 97.62%
+Train Acc: 97.62% | Test Acc: 88.93%
+
+Epoch 80/100
+  Batch [0/391] Loss: 0.045 Acc: 99.22%
+  Batch [100/391] Loss: 0.058 Acc: 98.10%
+  Batch [200/391] Loss: 0.060 Acc: 98.03%
+  Batch [300/391] Loss: 0.063 Acc: 97.88%
+Train Acc: 97.85% | Test Acc: 89.36%
+✓ Saved best model (acc: 89.36%)
+
+Epoch 81/100
+  Batch [0/391] Loss: 0.032 Acc: 99.22%
+  Batch [100/391] Loss: 0.059 Acc: 97.98%
+  Batch [200/391] Loss: 0.061 Acc: 97.93%
+  Batch [300/391] Loss: 0.062 Acc: 97.84%
+Train Acc: 97.88% | Test Acc: 89.37%
+✓ Saved best model (acc: 89.37%)
+
+Epoch 82/100
+  Batch [0/391] Loss: 0.017 Acc: 100.00%
+  Batch [100/391] Loss: 0.058 Acc: 98.08%
+  Batch [200/391] Loss: 0.057 Acc: 98.10%
+  Batch [300/391] Loss: 0.058 Acc: 98.05%
+Train Acc: 98.03% | Test Acc: 89.33%
+
+Epoch 83/100
+  Batch [0/391] Loss: 0.052 Acc: 97.66%
+  Batch [100/391] Loss: 0.061 Acc: 97.84%
+  Batch [200/391] Loss: 0.056 Acc: 98.01%
+  Batch [300/391] Loss: 0.057 Acc: 97.98%
+Train Acc: 98.00% | Test Acc: 89.30%
+
+Epoch 84/100
+  Batch [0/391] Loss: 0.041 Acc: 98.44%
+  Batch [100/391] Loss: 0.055 Acc: 98.10%
+  Batch [200/391] Loss: 0.056 Acc: 98.08%
+  Batch [300/391] Loss: 0.055 Acc: 98.11%
+Train Acc: 98.13% | Test Acc: 89.42%
+✓ Saved best model (acc: 89.42%)
+
+Epoch 85/100
+  Batch [0/391] Loss: 0.067 Acc: 98.44%
+  Batch [100/391] Loss: 0.055 Acc: 98.12%
+  Batch [200/391] Loss: 0.055 Acc: 98.15%
+  Batch [300/391] Loss: 0.053 Acc: 98.25%
+Train Acc: 98.24% | Test Acc: 89.36%
+
+Epoch 86/100
+  Batch [0/391] Loss: 0.030 Acc: 98.44%
+  Batch [100/391] Loss: 0.051 Acc: 98.24%
+  Batch [200/391] Loss: 0.050 Acc: 98.37%
+  Batch [300/391] Loss: 0.050 Acc: 98.34%
+Train Acc: 98.35% | Test Acc: 89.42%
+
+Epoch 87/100
+  Batch [0/391] Loss: 0.016 Acc: 99.22%
+  Batch [100/391] Loss: 0.047 Acc: 98.54%
+  Batch [200/391] Loss: 0.047 Acc: 98.55%
+  Batch [300/391] Loss: 0.047 Acc: 98.49%
+Train Acc: 98.51% | Test Acc: 89.46%
+✓ Saved best model (acc: 89.46%)
+
+Epoch 88/100
+  Batch [0/391] Loss: 0.057 Acc: 98.44%
+  Batch [100/391] Loss: 0.043 Acc: 98.60%
+  Batch [200/391] Loss: 0.043 Acc: 98.58%
+  Batch [300/391] Loss: 0.045 Acc: 98.52%
+Train Acc: 98.50% | Test Acc: 89.30%
+
+Epoch 89/100
+  Batch [0/391] Loss: 0.074 Acc: 98.44%
+  Batch [100/391] Loss: 0.041 Acc: 98.69%
+  Batch [200/391] Loss: 0.043 Acc: 98.57%
+  Batch [300/391] Loss: 0.042 Acc: 98.61%
+Train Acc: 98.62% | Test Acc: 89.70%
+✓ Saved best model (acc: 89.70%)
+
+Epoch 90/100
+  Batch [0/391] Loss: 0.036 Acc: 98.44%
+  Batch [100/391] Loss: 0.044 Acc: 98.58%
+  Batch [200/391] Loss: 0.044 Acc: 98.55%
+  Batch [300/391] Loss: 0.042 Acc: 98.61%
+Train Acc: 98.64% | Test Acc: 89.29%
+
+Epoch 91/100
+  Batch [0/391] Loss: 0.049 Acc: 98.44%
+  Batch [100/391] Loss: 0.039 Acc: 98.69%
+  Batch [200/391] Loss: 0.041 Acc: 98.62%
+  Batch [300/391] Loss: 0.041 Acc: 98.60%
+Train Acc: 98.59% | Test Acc: 89.46%
+
+Epoch 92/100
+  Batch [0/391] Loss: 0.060 Acc: 98.44%
+  Batch [100/391] Loss: 0.041 Acc: 98.79%
+  Batch [200/391] Loss: 0.041 Acc: 98.78%
+  Batch [300/391] Loss: 0.041 Acc: 98.76%
+Train Acc: 98.72% | Test Acc: 89.54%
+
+Epoch 93/100
+  Batch [0/391] Loss: 0.028 Acc: 99.22%
+  Batch [100/391] Loss: 0.037 Acc: 98.75%
+  Batch [200/391] Loss: 0.039 Acc: 98.76%
+  Batch [300/391] Loss: 0.039 Acc: 98.77%
+Train Acc: 98.78% | Test Acc: 89.51%
+
+Epoch 94/100
+  Batch [0/391] Loss: 0.011 Acc: 100.00%
+  Batch [100/391] Loss: 0.036 Acc: 98.86%
+  Batch [200/391] Loss: 0.037 Acc: 98.81%
+  Batch [300/391] Loss: 0.039 Acc: 98.79%
+Train Acc: 98.80% | Test Acc: 89.70%
+
+Epoch 95/100
+  Batch [0/391] Loss: 0.043 Acc: 99.22%
+  Batch [100/391] Loss: 0.039 Acc: 98.83%
+  Batch [200/391] Loss: 0.040 Acc: 98.74%
+  Batch [300/391] Loss: 0.039 Acc: 98.76%
+Train Acc: 98.73% | Test Acc: 89.68%
+
+Epoch 96/100
+  Batch [0/391] Loss: 0.035 Acc: 99.22%
+  Batch [100/391] Loss: 0.036 Acc: 98.87%
+  Batch [200/391] Loss: 0.036 Acc: 98.84%
+  Batch [300/391] Loss: 0.036 Acc: 98.86%
+Train Acc: 98.84% | Test Acc: 89.55%
+
+Epoch 97/100
+  Batch [0/391] Loss: 0.055 Acc: 97.66%
+  Batch [100/391] Loss: 0.037 Acc: 98.78%
+  Batch [200/391] Loss: 0.036 Acc: 98.84%
+  Batch [300/391] Loss: 0.038 Acc: 98.73%
+Train Acc: 98.76% | Test Acc: 89.46%
+
+Epoch 98/100
+  Batch [0/391] Loss: 0.039 Acc: 99.22%
+  Batch [100/391] Loss: 0.037 Acc: 98.69%
+  Batch [200/391] Loss: 0.037 Acc: 98.79%
+  Batch [300/391] Loss: 0.037 Acc: 98.83%
+Train Acc: 98.83% | Test Acc: 89.73%
+✓ Saved best model (acc: 89.73%)
+
+Epoch 99/100
+  Batch [0/391] Loss: 0.026 Acc: 99.22%
+  Batch [100/391] Loss: 0.037 Acc: 98.79%
+  Batch [200/391] Loss: 0.038 Acc: 98.77%
+  Batch [300/391] Loss: 0.038 Acc: 98.78%
+Train Acc: 98.78% | Test Acc: 89.63%
+
+Epoch 100/100
+  Batch [0/391] Loss: 0.050 Acc: 98.44%
+  Batch [100/391] Loss: 0.035 Acc: 98.87%
+  Batch [200/391] Loss: 0.036 Acc: 98.87%
+  Batch [300/391] Loss: 0.037 Acc: 98.86%
+Train Acc: 98.86% | Test Acc: 89.48%
+
+======================================================================
+EVALUATING FP32 BASELINE
+======================================================================
+FP32 Accuracy: 89.73%
+FP32 Latency: 0.050 ms/image
+FP32 Model Size: 8.77 MB
+
+======================================================================
+APPLYING INT8 POST-TRAINING QUANTIZATION
+======================================================================
+Traceback (most recent call last):
+  File "/home/malak/alnemari_lab/08_rdia_collaborations/malak_platform/pruning_experiment.py", line 19, in <module>
+    from simple_experiment import MobileNetV2_CIFAR10
+  File "/home/malak/alnemari_lab/08_rdia_collaborations/malak_platform/simple_experiment.py", line 189, in <module>
+    int8_ptq_accuracy, int8_ptq_latency = evaluate(model_int8_ptq, testloader)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/alnemari_lab/08_rdia_collaborations/malak_platform/simple_experiment.py", line 128, in evaluate
+    outputs = model(inputs)
+              ^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torchvision/models/mobilenetv2.py", line 174, in forward
+    return self._forward_impl(x)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torchvision/models/mobilenetv2.py", line 170, in _forward_impl
+    x = self.classifier(x)
+        ^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/container.py", line 240, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1751, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1762, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/ao/nn/quantized/dynamic/modules/linear.py", line 57, in forward
+    Y = torch.ops.quantized.linear_dynamic(
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/malak/anaconda3/lib/python3.11/site-packages/torch/_ops.py", line 1158, in __call__
+    return self._op(*args, **(kwargs or {}))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+NotImplementedError: Could not run 'quantized::linear_dynamic' with arguments from the 'CUDA' backend. This could be because the operator doesn't exist for this backend, or was omitted during the selective/custom build process (if using custom build). If you are a Facebook employee using PyTorch on mobile, please visit https://fburl.com/ptmfixes for possible resolutions. 'quantized::linear_dynamic' is only available for these backends: [CPU, Meta, BackendSelect, Python, FuncTorchDynamicLayerBackMode, Functionalize, Named, Conjugate, Negative, ZeroTensor, ADInplaceOrView, AutogradOther, AutogradCPU, AutogradCUDA, AutogradXLA, AutogradMPS, AutogradXPU, AutogradHPU, AutogradLazy, AutogradMTIA, AutogradMeta, Tracer, AutocastCPU, AutocastMTIA, AutocastXPU, AutocastMPS, AutocastCUDA, FuncTorchBatched, BatchedNestedTensor, FuncTorchVmapMode, Batched, VmapMode, FuncTorchGradWrapper, PythonTLSSnapshot, FuncTorchDynamicLayerFrontMode, PreDispatch, PythonDispatcher].
+
+CPU: registered at /pytorch/aten/src/ATen/native/quantized/cpu/qlinear_dynamic.cpp:1027 [kernel]
+Meta: registered at /pytorch/aten/src/ATen/core/MetaFallbackKernel.cpp:23 [backend fallback]
+BackendSelect: fallthrough registered at /pytorch/aten/src/ATen/core/BackendSelectFallbackKernel.cpp:3 [backend fallback]
+Python: registered at /pytorch/aten/src/ATen/core/PythonFallbackKernel.cpp:194 [backend fallback]
+FuncTorchDynamicLayerBackMode: registered at /pytorch/aten/src/ATen/functorch/DynamicLayer.cpp:479 [backend fallback]
+Functionalize: registered at /pytorch/aten/src/ATen/FunctionalizeFallbackKernel.cpp:349 [backend fallback]
+Named: registered at /pytorch/aten/src/ATen/core/NamedRegistrations.cpp:7 [backend fallback]
+Conjugate: registered at /pytorch/aten/src/ATen/ConjugateFallback.cpp:17 [backend fallback]
+Negative: registered at /pytorch/aten/src/ATen/native/NegateFallback.cpp:18 [backend fallback]
+ZeroTensor: registered at /pytorch/aten/src/ATen/ZeroTensorFallback.cpp:86 [backend fallback]
+ADInplaceOrView: fallthrough registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:100 [backend fallback]
+AutogradOther: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:63 [backend fallback]
+AutogradCPU: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:67 [backend fallback]
+AutogradCUDA: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:75 [backend fallback]
+AutogradXLA: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:83 [backend fallback]
+AutogradMPS: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:91 [backend fallback]
+AutogradXPU: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:71 [backend fallback]
+AutogradHPU: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:104 [backend fallback]
+AutogradLazy: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:87 [backend fallback]
+AutogradMTIA: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:79 [backend fallback]
+AutogradMeta: registered at /pytorch/aten/src/ATen/core/VariableFallbackKernel.cpp:95 [backend fallback]
+Tracer: registered at /pytorch/torch/csrc/autograd/TraceTypeManual.cpp:294 [backend fallback]
+AutocastCPU: fallthrough registered at /pytorch/aten/src/ATen/autocast_mode.cpp:322 [backend fallback]
+AutocastMTIA: fallthrough registered at /pytorch/aten/src/ATen/autocast_mode.cpp:466 [backend fallback]
+AutocastXPU: fallthrough registered at /pytorch/aten/src/ATen/autocast_mode.cpp:504 [backend fallback]
+AutocastMPS: fallthrough registered at /pytorch/aten/src/ATen/autocast_mode.cpp:209 [backend fallback]
+AutocastCUDA: fallthrough registered at /pytorch/aten/src/ATen/autocast_mode.cpp:165 [backend fallback]
+FuncTorchBatched: registered at /pytorch/aten/src/ATen/functorch/LegacyBatchingRegistrations.cpp:731 [backend fallback]
+BatchedNestedTensor: registered at /pytorch/aten/src/ATen/functorch/LegacyBatchingRegistrations.cpp:758 [backend fallback]
+FuncTorchVmapMode: fallthrough registered at /pytorch/aten/src/ATen/functorch/VmapModeRegistrations.cpp:27 [backend fallback]
+Batched: registered at /pytorch/aten/src/ATen/LegacyBatchingRegistrations.cpp:1075 [backend fallback]
+VmapMode: fallthrough registered at /pytorch/aten/src/ATen/VmapModeRegistrations.cpp:33 [backend fallback]
+FuncTorchGradWrapper: registered at /pytorch/aten/src/ATen/functorch/TensorWrapper.cpp:208 [backend fallback]
+PythonTLSSnapshot: registered at /pytorch/aten/src/ATen/core/PythonFallbackKernel.cpp:202 [backend fallback]
+FuncTorchDynamicLayerFrontMode: registered at /pytorch/aten/src/ATen/functorch/DynamicLayer.cpp:475 [backend fallback]
+PreDispatch: registered at /pytorch/aten/src/ATen/core/PythonFallbackKernel.cpp:206 [backend fallback]
+PythonDispatcher: registered at /pytorch/aten/src/ATen/core/PythonFallbackKernel.cpp:198 [backend fallback]
+

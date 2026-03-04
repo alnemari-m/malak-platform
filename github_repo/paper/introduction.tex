@@ -1,0 +1,33 @@
+\section{Introduction}
+
+The proliferation of Internet of Things (IoT) devices and the growing demand for privacy-preserving, low-latency intelligent systems have driven unprecedented interest in edge AI and TinyML \cite{warden2019tinyml}. Unlike cloud-based inference, on-device processing eliminates network latency, reduces bandwidth consumption, protects user privacy, and enables autonomous operation in disconnected environments. However, deploying sophisticated deep learning models on resource-constrained deviceswith limited memory (often <1MB RAM), processing power (tens to hundreds of MHz), and energy budgets (millijoules per inference)poses formidable challenges.
+
+\subsection{Motivation}
+
+Current edge AI development workflows suffer from fragmentation across the pipeline: researchers train models using PyTorch or TensorFlow, compress them with disparate tools, convert to device-specific formats manually, and integrate with embedded runtimes that lack standardization. This fragmentation leads to:
+
+\begin{itemize}
+\item \textbf{Productivity bottlenecks}: Engineers must master multiple toolchains and navigate incompatible interfaces
+\item \textbf{Suboptimal performance}: Lack of end-to-end optimization leaves performance on the table
+\item \textbf{Limited reproducibility}: Ad-hoc workflows hinder scientific validation and deployment consistency
+\item \textbf{Production gaps}: Missing telemetry, monitoring, and privacy compliance features delay real-world adoption
+\end{itemize}
+
+These challenges are particularly acute in domains requiring high reliability (medical diagnostics), strict privacy (personal health monitoring), or extreme resource constraints (battery-powered environmental sensors).
+
+\subsection{Contributions}
+
+This paper presents Malak Platform, a unified framework addressing the complete edge AI lifecycle. Our key contributions include:
+
+\begin{enumerate}
+\item \textbf{Integrated toolchain}: A cohesive pipeline spanning PyTorch training, knowledge distillation, INT4/INT8 quantization, multi-compiler support (TVM, MLIR, XLA), and optimized C++ runtime
+\item \textbf{Multi-language architecture}: Python for rapid experimentation, C++ for portable embedded execution, and Mojo for performance-critical kernelsbalancing productivity and efficiency
+\item \textbf{Hardware abstraction layer}: Pluggable backends supporting CPU (ARM NEON), CUDA, NPU, and DSP accelerators with zero-copy I/O
+\item \textbf{Production-ready features}: Privacy policies, telemetry, drift detection, and accuracy monitoring for compliance and reliability
+\item \textbf{Reference applications}: Three validated use cases (vision, energy, medical) demonstrating sub-50ms latency on microcontrollers with <2\% accuracy loss
+\item \textbf{Open ecosystem}: Extensible IR (EdgeIR) with optimization passes, comprehensive documentation, and reproducible benchmarks
+\end{enumerate}
+
+\subsection{Paper Organization}
+
+The remainder of this paper is structured as follows: Section II reviews related work in edge AI frameworks and model compression. Section III describes our methodology and design principles. Section IV details the platform architecture. Section V presents experimental validation across three applications. Section VI discusses results and limitations. Section VII concludes with future directions.

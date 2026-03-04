@@ -1,0 +1,26 @@
+\begin{table*}[t]
+\centering
+\caption{Comprehensive Experimental Validation Results}
+\label{tab:comprehensive_results}
+\begin{tabular}{llcccccc}
+\hline
+\textbf{Dataset} & \textbf{Model} & \textbf{Params} & \textbf{FP32} & \textbf{INT8} & \textbf{$\Delta$} & \textbf{Compression} & \textbf{Latency (ms)} \\
+\hline
+\multicolumn{8}{c}{\textit{Cross-Dataset Validation}} \\
+\hline
+CIFAR-10 & MobileNetV2 & 2.24M & 89.28\% & 88.78\% & 0.50\% & 1.00$\times$ & 0.67 \\
+Fashion-MNIST & SimpleCNN & 0.46M & 92.23\% & 92.28\% & -0.05\% & 2.91$\times$ & 9.91 \\
+\hline
+\multicolumn{8}{c}{\textit{Architecture Generalization}} \\
+\hline
+CIFAR-10 & MobileNetV2 & 2.24M & 89.28\% & 88.78\% & 0.50\% & 1.00$\times$ & 0.67 \\
+CIFAR-10 & ResNet18 & 11.17M & 91.78\% & 91.78\% & 0.00\% & 1.00$\times$ & 273.39 \\
+CIFAR-10 & EfficientNet-B0 & 4.02M & 81.26\% & 81.26\% & 0.00\% & 1.00$\times$ & 111.05 \\
+\hline
+\multicolumn{8}{c}{\textit{Embedded Hardware Validation (STM32H7 via Renode)}} \\
+\hline
+CIFAR-10 & MobileNetV2 (INT8) & 2.24M & \multicolumn{2}{c}{88.78\%} & --- & --- & $\sim$42 \\
+\multicolumn{2}{l}{Flash Usage: 31.7 KB (1.55\%)} & \multicolumn{3}{l}{RAM Usage: 10.5 KB (1.03\%)} & \multicolumn{3}{l}{Target: 480 MHz Cortex-M7} \\
+\hline
+\end{tabular}
+\end{table*}

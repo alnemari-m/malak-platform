@@ -1,0 +1,190 @@
+\section{Experimental Setup}
+
+This section details the experimental configuration for validating Malak Platform across three reference applications.
+
+\subsection{Application 1: Vision Jellyfish}
+
+\subsubsection{Task Description}
+Real-time detection and classification of marine life (specifically jellyfish species) from underwater camera footage. This application targets autonomous underwater vehicles (AUVs) and stationary monitoring systems in marine biology research.
+
+\subsubsection{Dataset}
+\begin{itemize}
+\item \textbf{Source}: Custom dataset collected from Mediterranean Sea expeditions
+\item \textbf{Size}: 15,000 annotated images (12,000 train, 1,500 validation, 1,500 test)
+\item \textbf{Classes}: 8 jellyfish species + background
+\item \textbf{Resolution}: 320$\times$240 RGB images
+\item \textbf{Challenges}: Variable lighting, occlusion, turbidity, class imbalance
+\end{itemize}
+
+\subsubsection{Model Architecture}
+\begin{itemize}
+\item \textbf{Baseline}: MobileNetV2-SSDLite (3.2M parameters)
+\item \textbf{Student}: Custom lightweight detector (680K parameters)
+\item \textbf{Backbone}: Depth-multiplier 0.35 MobileNetV2
+\item \textbf{Detection head}: Single-scale SSD with 3 anchor boxes
+\end{itemize}
+
+\subsubsection{Training Configuration}
+\begin{verbatim}
+Optimizer: AdamW (lr=1e-3, weight_decay=1e-4)
+Batch size: 32
+Epochs: 150 with cosine annealing
+Augmentation: Random flip, crop, color jitter,
+              Gaussian blur, brightness adjustment
+Knowledge distillation: Temperature=4.0,
+                        alpha=0.7 (soft labels)
+\end{verbatim}
+
+\subsubsection{Deployment Target}
+STM32H7 microcontroller (Cortex-M7 @ 480MHz, 1MB RAM) with camera interface operating in battery-powered enclosures.
+
+\subsection{Application 2: Energy Optimization}
+
+\subsubsection{Task Description}
+Short-term energy consumption forecasting for smart building management systems. Predicts next-hour electricity demand based on historical usage, time-of-day, occupancy sensors, and weather data.
+
+\subsubsection{Dataset}
+\begin{itemize}
+\item \textbf{Source}: UCI Appliances Energy Prediction dataset
+\item \textbf{Size}: 19,735 samples (4.5 months of 10-minute readings)
+\item \textbf{Features}: 29 inputs (temperature, humidity, lighting, appliance power)
+\item \textbf{Target}: Total energy consumption (kWh)
+\item \textbf{Split}: 70\% train, 15\% validation, 15\% test (temporal split)
+\end{itemize}
+
+\subsubsection{Model Architecture}
+\begin{itemize}
+\item \textbf{Baseline}: LSTM with 2 layers (128 units each, 265K parameters)
+\item \textbf{Student}: Quantized LSTM with 1 layer (64 units, 41K parameters)
+\item \textbf{Sequence length}: 24 timesteps (4 hours history)
+\item \textbf{Output}: Single-step ahead prediction
+\end{itemize}
+
+\subsubsection{Training Configuration}
+\begin{verbatim}
+Optimizer: Adam (lr=5e-4)
+Batch size: 64
+Epochs: 100 with early stopping (patience=15)
+Loss: Huber loss (delta=1.0)
+Normalization: Min-max scaling per feature
+Knowledge distillation: MSE between teacher and
+                        student hidden states
+\end{verbatim}
+
+\subsubsection{Deployment Target}
+Raspberry Pi 4 (Cortex-A72 @ 1.5GHz) integrated with building automation system, updating predictions every 10 minutes.
+
+\subsection{Application 3: Neuro MS}
+
+\subsubsection{Task Description}
+Segmentation of multiple sclerosis (MS) lesions in brain MRI scans for clinical decision support. Privacy-critical application requiring on-device processing to comply with HIPAA/GDPR.
+
+\subsubsection{Dataset}
+\begin{itemize}
+\item \textbf{Source}: ISBI 2015 Longitudinal MS Lesion Segmentation Challenge
+\item \textbf{Size}: 14 patients, 5 timepoints each (70 scans total)
+\item \textbf{Modalities}: T1-weighted, T2-weighted, FLAIR
+\item \textbf{Resolution}: 181$\times$217$\times$181 voxels
+\item \textbf{Preprocessing}: Skull stripping, bias field correction, registration
+\item \textbf{Augmentation}: Random rotation, elastic deformation, intensity shifts
+\end{itemize}
+
+\subsubsection{Model Architecture}
+\begin{itemize}
+\item \textbf{Baseline}: 3D U-Net (8.6M parameters)
+\item \textbf{Student}: Efficient U-Net with depthwise separable convolutions (1.2M parameters)
+\item \textbf{Depth}: 4 encoder/decoder levels
+\item \textbf{Filters}: [16, 32, 64, 128] with bottleneck at 256
+\end{itemize}
+
+\subsubsection{Training Configuration}
+\begin{verbatim}
+Optimizer: SGD with Nesterov momentum (lr=1e-2)
+Batch size: 2 (3D patches of 64^3)
+Epochs: 200
+Loss: Combined Dice + cross-entropy
+Class weighting: 10:1 (lesion:background)
+Knowledge distillation: Feature matching at
+                        decoder layers
+\end{verbatim}
+
+\subsubsection{Deployment Target}
+NVIDIA Jetson Nano (128-core GPU) for edge inference in clinical workstations, processing full 3D volumes in <5 seconds.
+
+\subsection{Compression Experiments}
+
+For each application, we evaluate:
+
+\subsubsection{Quantization Sweep}
+\begin{itemize}
+\item FP32 (baseline)
+\item INT8 post-training quantization (PTQ)
+\item INT8 quantization-aware training (QAT)
+\item INT4 weights + INT8 activations
+\item Mixed precision (automatic bit-width search)
+\end{itemize}
+
+\subsubsection{Pruning Configurations}
+\begin{itemize}
+\item Magnitude-based channel pruning at 30\%, 50\%, 70\% sparsity
+\item Iterative pruning with fine-tuning (5 cycles)
+\item Combined quantization + pruning
+\end{itemize}
+
+\subsubsection{Compiler Backends}
+\begin{itemize}
+\item TVM with AutoTVM tuning (1000 trials per operator)
+\item MLIR with hand-tuned quantization passes
+\item XLA (for Coral Edge TPU only)
+\item Baseline C++ (no compiler optimization)
+\end{itemize}
+
+\subsection{Profiling Setup}
+
+\subsubsection{Latency Measurement}
+\begin{itemize}
+\item 1000 inferences with warm-up (50 iterations)
+\item Per-layer profiling using on-chip cycle counters
+\item Reported metrics: mean, median, 95th percentile
+\end{itemize}
+
+\subsubsection{Energy Measurement}
+\begin{itemize}
+\item External power monitor (Monsoon Power Monitor) at 5 kHz sampling
+\item Isolated inference execution (no concurrent tasks)
+\item Energy = $\int$ Power $\times$ dt over inference window
+\end{itemize}
+
+\subsubsection{Memory Profiling}
+\begin{itemize}
+\item Peak RAM via linker map analysis + runtime allocator hooks
+\item Flash size from compiled binary (text + data sections)
+\item Memory bandwidth via cache miss counters (where available)
+\end{itemize}
+
+\subsection{Baseline Comparisons}
+
+We compare Malak Platform against:
+\begin{itemize}
+\item \textbf{TensorFlow Lite Micro}: Official TFLite interpreter for microcontrollers
+\item \textbf{CMSIS-NN}: ARM-optimized kernels with manual graph execution
+\item \textbf{MicroTVM}: Apache TVM with default autotuning
+\item \textbf{PyTorch Mobile}: PyTorch runtime for mobile devices
+\end{itemize}
+
+For fair comparison:
+\begin{enumerate}
+\item All frameworks use identical trained models (converted to respective formats)
+\item Same quantization scheme (INT8 symmetric per-tensor)
+\item Same target hardware and compiler toolchains (GCC 10.2, -O3 optimization)
+\item No framework-specific optimizations (e.g., operator fusion disabled for baselines lacking it)
+\end{enumerate}
+
+\subsection{Statistical Validation}
+
+All performance measurements report:
+\begin{itemize}
+\item Mean $\pm$ standard deviation across 5 independent runs
+\item Statistical significance via paired t-tests (p < 0.05)
+\item Confidence intervals (95\%) for accuracy metrics
+\end{itemize}

@@ -1,0 +1,17 @@
+{
+  "dataset": "Fashion-MNIST",
+  "model": "SimpleCNN",
+  "parameters": 458570,
+  "fp32": {
+    "accuracy": 92.23,
+    "latency_ms": 10.160944129847273,
+    "model_size_mb": 1.7535295486450195
+  },
+  "int8_ptq": {
+    "accuracy": 92.28,
+    "latency_ms": 9.908679165417634,
+    "model_size_mb": 0.6027727127075195,
+    "accuracy_drop": -0.04999999999999716,
+    "compression_ratio": 2.9091057237288647
+  }
+}

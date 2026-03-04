@@ -1,0 +1,119 @@
+╔══════════════════════════════════════════════════════════════════╗
+║              ⚠️  PLACEHOLDER DATA WARNING ⚠️                     ║
+╚══════════════════════════════════════════════════════════════════╝
+
+🚨 CRITICAL: This paper contains 100% PLACEHOLDER experimental data!
+
+📊 ALL OF THESE NUMBERS ARE FAKE EXAMPLES:
+
+   Accuracy Results:
+   • 82.4% mAP (Vision baseline)
+   • 81.9% after INT8 QAT
+   • <2% accuracy degradation
+   ❌ These are made-up example values!
+
+   Performance Results:
+   • 42ms inference latency
+   • 8.2 mJ energy per inference
+   • 1.6× speedup over TFLite
+   ❌ These are fictional benchmarks!
+
+   Dataset Specs:
+   • 15,000 images
+   • 8 jellyfish species
+   • 3.2M parameter model
+   ❌ These are placeholder specifications!
+
+🔬 WHAT YOU NEED TO DO:
+
+   1. ✅ Run ACTUAL experiments with your framework
+   2. ✅ Measure REAL performance on hardware
+   3. ✅ Collect ACTUAL accuracy/latency/energy data
+   4. ✅ Replace ALL placeholder numbers
+   5. ✅ Update figures with real coordinates
+
+📁 FILES WITH PLACEHOLDER DATA:
+
+   High Priority (Must Update):
+   • results.tex - ALL tables and numbers
+   • experiments.tex - Dataset/model specifications
+   • abstract*.tex - Performance claims
+   • fig/jellyfish_latency_fixed.tex - Chart data
+   • fig/pareto_frontier_fixed.tex - Plot coordinates
+   
+   Medium Priority:
+   • discussion.tex - Performance improvement claims
+   • fig/neuro_performance_fixed.tex - If using this app
+
+🎯 MINIMUM TO PUBLISH:
+
+   You need AT LEAST:
+   1. One real application/dataset
+   2. Actual accuracy measurements (FP32 vs INT8)
+   3. Real latency/memory benchmarks on hardware
+   4. One comparison against baseline framework
+
+💡 QUICK FIX OPTIONS:
+
+   Option 1: Simple Benchmark
+   • Use public dataset (CIFAR-10, MNIST)
+   • Train simple model (MobileNet)
+   • Quantize and measure
+   • Update only vision section
+
+   Option 2: Framework Paper
+   • Focus on architecture/design
+   • Remove experiments section
+   • Mark as "framework description"
+   • Submit to workshop first
+
+   Option 3: Simulation
+   • Use model analyzers to estimate
+   • Clearly mark as "estimated"
+   • Less convincing for reviewers
+
+📝 CREATED FOR YOU:
+
+   • EXPERIMENTAL_DATA_TODO.md
+     → Detailed guide of what to update
+     → Shows every placeholder location
+     → Checklist for experiments
+   
+   • results_TEMPLATE.tex
+     → Template with clear ⚠️ warnings
+     → Shows where to fill real data
+     → Easy to search and replace
+
+🚀 RECOMMENDED WORKFLOW:
+
+   1. Read EXPERIMENTAL_DATA_TODO.md
+   2. Decide which application(s) to keep
+   3. Run experiments and collect data
+   4. Use results_TEMPLATE.tex as guide
+   5. Replace placeholders with real numbers
+   6. Recompile and verify consistency
+
+⚠️  DO NOT SUBMIT WITH PLACEHOLDER DATA!
+
+   Reviewers WILL notice:
+   • Suspiciously round numbers
+   • Perfect results
+   • Missing error bars
+   • No experimental details
+
+   This will get your paper REJECTED.
+
+═══════════════════════════════════════════════════════════════════
+
+✅ THE GOOD NEWS:
+
+   • Paper structure is complete ✓
+   • Writing quality is good ✓
+   • TikZ figures work ✓
+   • All sections present ✓
+   
+   You just need REAL DATA to fill in!
+
+📖 Read: EXPERIMENTAL_DATA_TODO.md for complete guide
+
+═══════════════════════════════════════════════════════════════════

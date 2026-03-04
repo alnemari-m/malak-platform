@@ -1,0 +1,79 @@
+\section{Related Work}
+
+\subsection{Edge AI Frameworks}
+
+Several frameworks target edge AI deployment, each with distinct design philosophies and trade-offs.
+
+\textbf{TensorFlow Lite} \cite{tflite} provides a lightweight runtime for mobile and embedded devices, supporting post-training quantization and a converter from TensorFlow models. However, it lacks integrated training tools and hardware abstraction beyond ARM CPU and GPU backends.
+
+\textbf{TensorFlow Lite Micro} \cite{tflitemicro} extends TensorFlow Lite to microcontrollers with kilobytes of memory, offering portability across Cortex-M devices. Its limitations include manual memory management, restricted operator support, and absence of compiler-based optimizations.
+
+\textbf{CMSIS-NN} \cite{cmsis-nn} delivers ARM-optimized neural network kernels leveraging SIMD instructions. While highly efficient, it requires manual graph construction and lacks high-level training integration or cross-platform support.
+
+\textbf{Glow} \cite{glow} compiles neural networks to optimized machine code using LLVM, achieving strong performance on edge CPUs. However, its compilation times and limited quantization options constrain usability for rapid iteration.
+
+\textbf{MicroTVM} \cite{microtvm} brings Apache TVM's autotuning capabilities to microcontrollers, enabling cross-compilation for diverse targets. Challenges include steep learning curves, fragmented tooling, and incomplete production features (telemetry, privacy).
+
+\subsection{Model Compression Techniques}
+
+\textbf{Quantization} reduces numerical precision from FP32 to INT8 or lower, cutting memory and computation costs. Post-training quantization \cite{ptq} requires no retraining but may degrade accuracy. Quantization-aware training (QAT) \cite{qat} incorporates quantization effects during training, recovering accuracy at the expense of longer training times. Mixed-precision quantization \cite{mixed-precision} assigns different bit-widths per layer, balancing accuracy and efficiency.
+
+\textbf{Pruning} removes redundant connections (unstructured) or entire channels (structured). Structured pruning \cite{structured-pruning} aligns with hardware constraints, avoiding sparse kernels' overhead. Iterative magnitude pruning \cite{lottery-ticket} identifies critical subnetworks while maintaining performance.
+
+\textbf{Knowledge Distillation} \cite{distillation} trains compact student models to mimic larger teachers, transferring learned representations without architectural constraints. Recent variants include attention transfer \cite{attention-transfer} and self-distillation \cite{self-distillation}.
+
+\textbf{Neural Architecture Search (NAS)} \cite{nas} automates model design for target hardware, discovering efficient architectures like MobileNetV3 \cite{mobilenetv3} and EfficientNet \cite{efficientnet}. However, search costs and generalization to custom tasks remain challenging.
+
+\subsection{Intermediate Representations and Compilers}
+
+\textbf{ONNX} \cite{onnx} provides a vendor-neutral model exchange format, facilitating interoperability across frameworks. Its graph representation supports optimization passes but lacks embedded-specific features.
+
+\textbf{MLIR} \cite{mlir} offers a modular compiler infrastructure with customizable dialects, enabling domain-specific optimizations. Projects like IREE \cite{iree} demonstrate MLIR's potential for edge deployment, though adoption requires significant engineering investment.
+
+\textbf{XLA} \cite{xla} optimizes TensorFlow and JAX graphs with fusion, layout optimization, and ahead-of-time compilation. Its Edge TPU backend accelerates inference on Google Coral devices but limits portability.
+
+\subsection{Production Deployment Considerations}
+
+While research frameworks prioritize performance metrics (latency, accuracy), production systems require:
+\begin{itemize}
+\item \textbf{Privacy}: On-device processing avoids data exfiltration \cite{federated-learning}
+\item \textbf{Monitoring}: Drift detection and accuracy canaries ensure reliability \cite{ml-monitoring}
+\item \textbf{Compliance}: Auditable policies for regulated industries (healthcare, finance)
+\item \textbf{Lifecycle management}: OTA updates, rollback mechanisms, A/B testing
+\end{itemize}
+
+Existing frameworks address these concerns piecemeal, creating integration burdens for practitioners.
+
+\subsection{Positioning of Malak Platform}
+
+Malak Platform distinguishes itself through:
+\begin{enumerate}
+\item \textbf{End-to-end integration}: Unified pipeline from PyTorch training to embedded deployment, eliminating toolchain fragmentation
+\item \textbf{Multi-compiler backend}: Supports TVM, MLIR, and XLA simultaneously, enabling hardware-specific optimization without vendor lock-in
+\item \textbf{Production-first design}: Built-in telemetry, drift detection, privacy policies, and CLI automation
+\item \textbf{Multi-language architecture}: Python for productivity, C++ for portability, Mojo for peak performancebalancing expressiveness and efficiency
+\item \textbf{Validated applications}: Three real-world use cases (vision, energy, medical) demonstrating generalizability
+\end{enumerate}
+
+Table \ref{tab:comparison} compares Malak Platform against representative frameworks across key dimensions.
+
+\begin{table}[t]
+\centering
+\caption{Comparison of Edge AI Frameworks}
+\label{tab:comparison}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lccccc}
+\hline
+\textbf{Feature} & \textbf{TFLite} & \textbf{uTVM} & \textbf{CMSIS-NN} & \textbf{Glow} & \textbf{Malak} \\
+\hline
+Training Integration & \checkmark & \texttimes & \texttimes & \texttimes & \checkmark \\
+Multi-Compiler & \texttimes & \checkmark & \texttimes & \texttimes & \checkmark \\
+Hardware Abstraction & Partial & \checkmark & \texttimes & \checkmark & \checkmark \\
+Quantization (INT4/8) & INT8 & \checkmark & \checkmark & Partial & \checkmark \\
+Production Features & Partial & \texttimes & \texttimes & \texttimes & \checkmark \\
+Telemetry/Monitoring & \texttimes & \texttimes & \texttimes & \texttimes & \checkmark \\
+Privacy Policies & \texttimes & \texttimes & \texttimes & \texttimes & \checkmark \\
+\hline
+\end{tabular}%
+}
+\end{table}

@@ -1,0 +1,38 @@
+\section{Introduction}
+
+The explosion of IoT devices has created a fascinating challenge: how do we run sophisticated AI models on hardware that's barely more powerful than a digital watch? Edge AI and TinyML \cite{warden2019tinyml} promise to solve this by processing data locally—no cloud required. This approach eliminates network delays, saves bandwidth, protects privacy, and works even when you're offline. The catch? These devices often have less than 1MB of RAM, run at a few hundred MHz, and need to sip power measured in millijoules. Fitting modern deep learning into these constraints feels like trying to squeeze an elephant into a Mini Cooper.
+
+\subsection{Motivation}
+
+Here's the frustrating reality of edge AI development today: the tools are fragmented. You train your model in PyTorch or TensorFlow, then scramble to find compression tools that actually work. Next, you manually convert everything to some device-specific format, hoping you don't lose too much accuracy along the way. Finally, you wrestle with an embedded runtime that may or may not be well-documented. This workflow creates several headaches:
+
+\begin{itemize}
+\item \textbf{Productivity bottlenecks}: You end up becoming a jack-of-all-trades, mastering toolchain after toolchain, each with its own quirks and incompatibilities
+\item \textbf{Suboptimal performance}: Without end-to-end optimization, you leave performance gains on the table—sometimes significant ones
+\item \textbf{Limited reproducibility}: Everyone's workflow is slightly different, making it nearly impossible to reproduce results or compare approaches fairly
+\item \textbf{Production gaps}: Most frameworks ignore real-world needs like telemetry, monitoring, and privacy compliance, forcing you to build these yourself
+\end{itemize}
+
+These problems get even worse in demanding domains. Medical diagnostics need high reliability. Personal health monitoring requires strict privacy. Battery-powered environmental sensors can't afford to waste a single millijoule.
+
+\subsection{Contributions}
+
+Malak Platform is our attempt to fix this mess. It's a unified framework that handles the entire edge AI pipeline—from initial training to final deployment. Here's what we built:
+
+\begin{enumerate}
+\item \textbf{Integrated toolchain}: Everything you need in one place—PyTorch training, knowledge distillation, INT4/INT8 quantization, multi-compiler support (TVM, MLIR, XLA), and an optimized C++ runtime. No more gluing together incompatible tools.
+
+\item \textbf{Multi-language architecture}: We use Python where it makes sense (rapid prototyping), C++ for portable embedded execution, and Mojo for performance-critical kernels. Each language does what it does best.
+
+\item \textbf{Hardware abstraction layer}: Write your code once, deploy anywhere. We support ARM NEON, CUDA, NPUs, and DSP accelerators through pluggable backends with zero-copy I/O.
+
+\item \textbf{Production-ready features}: Built-in privacy policies, telemetry, drift detection, and accuracy monitoring. These aren't afterthoughts—they're core features designed for actual deployment.
+
+\item \textbf{Reference applications}: We validated the platform with three diverse use cases: underwater jellyfish detection (vision), smart grid forecasting (time-series), and MS lesion segmentation (medical imaging). All three hit sub-50ms latency on microcontrollers with less than 2\% accuracy loss.
+
+\item \textbf{Open ecosystem}: Extensible intermediate representation (EdgeIR) with optimization passes, comprehensive docs, and reproducible benchmarks. Everything's open source.
+\end{enumerate}
+
+\subsection{Paper Organization}
+
+The rest of this paper walks through what we built and how well it works. Section II covers related work in edge AI frameworks and compression techniques. Section III explains our methodology and design choices. Section IV dives into the architecture. Section V presents our experimental results across the three applications. Section VI discusses what worked, what didn't, and what we learned. Section VII wraps up with future directions.

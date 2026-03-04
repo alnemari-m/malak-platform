@@ -137,6 +137,46 @@ pdflatex main_fixed.tex
 - [Renode Implementation](RENODE_IMPLEMENTATION_COMPLETE.md)
 - [Paper Package Info](OVERLEAF_PACKAGE_INFO.md)
 
+## Future Work
+
+The platform roadmap includes several planned enhancements to expand capabilities beyond the current research validation:
+
+### Multi-Language Runtime Architecture
+- **C++ Embedded Runtime**: Optimized static graph executor with memory planner and operator registry
+- **Mojo High-Performance Kernels**: MLIR-friendly quantized matmul/conv microkernels with LUT-based quantization
+- **Hardware Abstraction Layer**: Pluggable backends for NPU, DSP, and specialized accelerators
+
+### Advanced Compression Techniques
+- **Structured Pruning**: Channel-level and filter pruning for additional model compression
+- **Knowledge Distillation**: Teacher-student training for improved small model accuracy
+- **INT4 Quantization**: Ultra-low precision quantization for extreme edge devices
+- **Mixed-Precision**: Per-layer precision optimization based on sensitivity analysis
+
+### Extended Hardware Support
+- **Physical Hardware Validation**: Testing on actual STM32H7, nRF52, ESP32 devices
+- **NPU Integration**: Support for ARM Ethos-U, Google Edge TPU
+- **DSP Backends**: TI C6000, Qualcomm Hexagon integration
+- **RISC-V Support**: SiFive, Andes RISC-V core deployment
+
+### Custom IR and Optimization
+- **Edge IR**: Custom intermediate representation optimized for edge deployment
+- **Advanced Optimization Passes**: Operator fusion, constant folding, layout transforms
+- **Autotuning**: TVM/MLIR-based per-target compilation optimization
+- **FlatBuffers Serialization**: Compact model format for embedded systems
+
+### Production Features
+- **Reference Applications**: Vision (object detection), medical imaging, energy optimization
+- **Telemetry System**: Performance counters, energy monitoring, on-device logging
+- **Drift Detection**: Online accuracy monitoring and model degradation detection
+- **Privacy Policies**: Configurable data retention, fallback, and escalation policies
+- **Unified CLI**: Single `edgeai` command-line tool for build, quantize, flash, eval, profile
+
+### Extended Validation
+- **Additional Datasets**: ImageNet, COCO, medical imaging datasets
+- **More Architectures**: MobileNetV3, EfficientNetV2, YOLO variants
+- **Energy Measurements**: Actual power consumption on battery-powered devices
+- **Latency Profiling**: Detailed operator-level performance analysis
+
 ## License
 
 See [LICENSE](LICENSE) for details.

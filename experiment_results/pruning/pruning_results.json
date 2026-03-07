@@ -1,0 +1,68 @@
+{
+  "baseline": {
+    "accuracy": 77.81,
+    "latency_ms": 0.6352509548769721,
+    "model_size_mb": 8.763713836669922,
+    "parameters": 2236682
+  },
+  "magnitude_30": {
+    "method": "magnitude_pruning",
+    "target_sparsity": 0.3,
+    "actual_sparsity": 0.2954233100637462,
+    "accuracy_before_finetune": 65.96,
+    "accuracy_after_finetune": 77.32,
+    "accuracy_drop": 0.4900000000000091,
+    "latency_ms": 0.5570270262564285,
+    "parameters_nonzero": 1575914,
+    "parameters_total": 2236682,
+    "model_size_mb": 8.763713836669922
+  },
+  "magnitude_50": {
+    "method": "magnitude_pruning",
+    "target_sparsity": 0.5,
+    "actual_sparsity": 0.492372183439577,
+    "accuracy_before_finetune": 16.18,
+    "accuracy_after_finetune": 75.66,
+    "accuracy_drop": 2.1500000000000057,
+    "latency_ms": 0.5340288051321537,
+    "parameters_nonzero": 1135402,
+    "parameters_total": 2236682,
+    "model_size_mb": 8.763713836669922
+  },
+  "magnitude_70": {
+    "method": "magnitude_pruning",
+    "target_sparsity": 0.7,
+    "actual_sparsity": 0.6893210568154078,
+    "accuracy_before_finetune": 10.0,
+    "accuracy_after_finetune": 70.47,
+    "accuracy_drop": 7.340000000000003,
+    "latency_ms": 0.5108463707603986,
+    "parameters_nonzero": 694890,
+    "parameters_total": 2236682,
+    "model_size_mb": 8.763713836669922
+  },
+  "structured_30": {
+    "method": "structured_pruning",
+    "target_sparsity": 0.3,
+    "actual_sparsity": 0.2955431304047692,
+    "accuracy_before_finetune": 10.0,
+    "accuracy_after_finetune": 72.86,
+    "accuracy_drop": 4.950000000000003,
+    "latency_ms": 0.561564359106595,
+    "parameters_nonzero": 1575646,
+    "parameters_total": 2236682,
+    "model_size_mb": 8.763713836669922
+  },
+  "structured_50": {
+    "method": "structured_pruning",
+    "target_sparsity": 0.5,
+    "actual_sparsity": 0.492372183439577,
+    "accuracy_before_finetune": 10.0,
+    "accuracy_after_finetune": 64.17,
+    "accuracy_drop": 13.64,
+    "latency_ms": 0.578918058095099,
+    "parameters_nonzero": 1135402,
+    "parameters_total": 2236682,
+    "model_size_mb": 8.763713836669922
+  }
+}

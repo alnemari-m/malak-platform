@@ -2,29 +2,31 @@
   "ResNet18": {
     "parameters": 11173962,
     "fp32": {
-      "accuracy": 91.78,
-      "latency_ms": 273.3879119535036,
-      "model_size_mb": 42.70063304901123
+      "accuracy": 87.41,
+      "latency_ms": 1.3777536776246904,
+      "model_size_mb": 42.70096969604492
     },
     "int8": {
-      "accuracy": 91.78,
-      "latency_ms": 273.3879119535036,
-      "model_size_mb": 42.70063304901123,
-      "accuracy_drop": 0.0
+      "accuracy": 87.38,
+      "latency_ms": 1.2885808850391,
+      "model_size_mb": 42.6871280670166,
+      "accuracy_drop": 0.030000000000001137,
+      "compression_ratio": 1.0003242576780191
     }
   },
   "EfficientNet-B0": {
     "parameters": 4020358,
     "fp32": {
-      "accuracy": 81.26,
-      "latency_ms": 111.05493352382997,
-      "model_size_mb": 15.621270179748535
+      "accuracy": 66.81,
+      "latency_ms": 2.7835497373267066,
+      "model_size_mb": 15.622968673706055
     },
     "int8": {
-      "accuracy": 81.26,
-      "latency_ms": 111.05493352382997,
-      "model_size_mb": 15.621270179748535,
-      "accuracy_drop": 0.0
+      "accuracy": 66.68,
+      "latency_ms": 2.7563062413961075,
+      "model_size_mb": 15.587154388427734,
+      "accuracy_drop": 0.12999999999999545,
+      "compression_ratio": 1.0022976795113359
     }
   }
 }

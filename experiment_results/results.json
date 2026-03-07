@@ -4,25 +4,30 @@
     "train_size": 50000,
     "test_size": 10000,
     "classes": 10,
-    "resolution": "32\u00d732 RGB"
+    "resolution": "32x32 RGB"
   },
   "model": {
     "architecture": "MobileNetV2",
     "parameters": 2236682,
-    "fp32_size_mb": 8.76380443572998,
-    "int8_size_mb": 8.727742195129395,
-    "compression_ratio": 1.0041319094668848
+    "fp32_size_mb": 8.763713836669922
   },
-  "accuracy": {
-    "fp32_baseline": 89.28,
-    "int8_ptq": 89.26,
-    "int8_qat": 88.78,
-    "ptq_degradation": 0.01999999999999602,
-    "qat_degradation": 0.5
+  "fp32": {
+    "accuracy": 77.81,
+    "latency_ms": 0.5645134922447084,
+    "model_size_mb": 8.763713836669922
   },
-  "performance": {
-    "fp32_latency_ms": 0.6668917080269584,
-    "int8_latency_ms": 0.6682550228094752,
-    "speedup": 0.9979598884617654
+  "dynamic_ptq": {
+    "accuracy": 77.84,
+    "latency_ms": 0.5482885090610649,
+    "model_size_mb": 8.727899551391602,
+    "accuracy_drop": -0.030000000000001137,
+    "compression_ratio": 1.004103425465364
+  },
+  "qat": {
+    "accuracy": 76.72,
+    "latency_ms": 0.7896365574266337,
+    "model_size_mb": 2.824718475341797,
+    "accuracy_drop": 1.0900000000000034,
+    "compression_ratio": 3.1025087679257997
   }
 }

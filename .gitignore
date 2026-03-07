@@ -52,6 +52,24 @@ nohup.out
 .DS_Store
 Thumbs.db
 
+# Virtual environments
+venv_exp/
+.venv/
+
 # Temporary files
 _temp_backup_untracked/
 *.bin
+
+# Data downloads
+data/
+FashionMNIST/
+
+# ONNX models
+*.onnx
+
+# Pytest cache
+.pytest_cache/
+
+# Experiment model weights (large files)
+experiment_results/*.pth
+experiment_results/**/*.pth

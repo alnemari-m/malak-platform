@@ -3,15 +3,15 @@
   "model": "SimpleCNN",
   "parameters": 458570,
   "fp32": {
-    "accuracy": 92.23,
-    "latency_ms": 10.160944129847273,
-    "model_size_mb": 1.7535295486450195
+    "accuracy": 92.19,
+    "latency_ms": 0.17358614957030816,
+    "model_size_mb": 1.753225326538086
   },
   "int8_ptq": {
-    "accuracy": 92.28,
-    "latency_ms": 9.908679165417634,
-    "model_size_mb": 0.6027727127075195,
-    "accuracy_drop": -0.04999999999999716,
-    "compression_ratio": 2.9091057237288647
+    "accuracy": 92.2,
+    "latency_ms": 0.09664796481404124,
+    "model_size_mb": 0.6024913787841797,
+    "accuracy_drop": -0.010000000000005116,
+    "compression_ratio": 2.9099591932353843
   }
 }

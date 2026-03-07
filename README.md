@@ -1,190 +1,136 @@
-<div align="center">
-  <img src="logo.png" alt="Malak Platform Logo" width="400"/>
-</div>
+# Malak
 
-# Malak Platform
+A Python toolkit for edge AI model optimization.
 
-**A research platform for training, quantizing, and validating deep neural networks on embedded systems with comprehensive experimental validation.**
+Malak provides a unified API for training, quantization, pruning, distillation,
+ONNX export, inference benchmarking, and monitoring — all built on PyTorch.
 
-## Overview
+## Features
 
-Malak Platform is a PyTorch-based research framework for edge AI deployment. It provides training pipelines, INT8 quantization, TFLite Micro compilation, and embedded validation using Renode simulation. The platform has been validated across multiple datasets and architectures with comprehensive experimental results.
+- **Training**: Configurable training loop with SGD/Adam, cosine annealing, CIFAR-10/Fashion-MNIST loaders
+- **Quantization**: Dynamic PTQ, Static PTQ, Quantization-Aware Training (QAT)
+- **Compression**: Magnitude pruning, structured pruning, knowledge distillation
+- **Export**: ONNX model export with validation
+- **Runtime**: Latency and throughput benchmarking
+- **Monitoring**: Per-layer latency profiling, KL-divergence drift detection
+- **CLI**: `edgeai` command-line tool for common tasks
+- **Embedded**: Proof-of-concept C inference for ARM Cortex-M7
 
-## Key Features
+## Installation
 
-- **PyTorch Training**: Standard training pipelines for computer vision models
-- **INT8 Quantization**: Post-training quantization (PTQ) and quantization-aware training (QAT)
-- **TFLite Micro**: Embedded deployment compilation for ARM Cortex-M devices
-- **Renode Validation**: Cycle-accurate simulation for STM32H7 and Raspberry Pi 3
-- **Cross-Dataset Testing**: Validated on CIFAR-10 and Fashion-MNIST
-- **Architecture Generalization**: Tested on MobileNetV2, SimpleCNN, ResNet18, and EfficientNet-B0
+```bash
+git clone https://github.com/alnemari-m/malak-platform.git
+cd malak-platform
+pip install -e .
+```
 
-## Experimental Results
+For optional ONNX support:
+```bash
+pip install -e ".[onnx]"
+```
 
-### Completed Validation (4/5 Experiments)
+## Quick Start
 
-1. **CIFAR-10 Baseline** (MobileNetV2, 2.24M parameters)
-   - FP32: 89.28% accuracy
-   - INT8: 88.78% accuracy (0.50% degradation)
-   - Model size: 8.76 MB
+### Python API
 
-2. **Fashion-MNIST** (SimpleCNN, 0.46M parameters)
-   - FP32: 92.23% accuracy
-   - INT8: 92.28% accuracy (+0.05% improvement!)
-   - Model size: 1.75 MB → 0.60 MB (2.91× compression)
+```python
+from malak.training import Trainer, get_cifar10
+from malak.quantization import DynamicPTQ, QAT
 
-3. **Architecture Comparison** (CIFAR-10)
-   - **ResNet18** (11.17M parameters): 91.78% → 91.78% (0.00% drop)
-   - **EfficientNet-B0** (4.02M parameters): 81.26% → 81.26% (0.00% drop)
+# Load data
+train_loader, test_loader, _, _ = get_cifar10()
 
-4. **Renode Embedded Validation** (STM32H7 Cortex-M7 @ 480 MHz)
-   - Flash usage: 31.7 KB (1.55%)
-   - RAM usage: 10.5 KB (1.03%)
-   - Inference latency: ~42 ms
-   - Binary size: 347 KB
+# Train a model
+trainer = Trainer(model, lr=0.01, optimizer_type="sgd")
+trainer.train(train_loader, test_loader, epochs=100)
 
-### Coverage
-- **Datasets**: 2 (CIFAR-10, Fashion-MNIST)
-- **Architectures**: 4 (MobileNetV2, SimpleCNN, ResNet18, EfficientNet-B0)
-- **Parameter range**: 0.46M to 11.17M (24× range)
-- **Platforms**: x86 CPU, ARM Cortex-M7 (simulated)
+# Quantize with dynamic PTQ
+dptq = DynamicPTQ()
+quantized = dptq.quantize(model)
+
+# Or use QAT for better accuracy
+qat = QAT()
+model = qat.prepare(model, backend="fbgemm")
+model = qat.train(model, train_loader, test_loader, epochs=20)
+quantized = qat.convert(model)
+```
+
+### CLI
+
+```bash
+edgeai train --dataset cifar10 --model mobilenetv2 --epochs 100
+edgeai quantize --model model.pth --method ptq-dynamic
+edgeai evaluate --model model.pth --dataset cifar10
+edgeai export --model model.pth
+edgeai profile --model model.pth
+```
+
+## Reproducing Paper Results
+
+Run experiments in order:
+
+```bash
+# 1. CIFAR-10 baseline + quantization (long — can run overnight)
+python experiments/simple_experiment.py
+
+# 2. Architecture comparison
+python experiments/architecture_comparison.py
+
+# 3. Fashion-MNIST (quick)
+python experiments/fashion_mnist_experiment.py
+
+# 4. Pruning (requires step 1)
+python experiments/pruning_experiment.py
+
+# 5. Update paper tables with measured results
+python experiments/update_paper_tables.py
+```
+
+Results are saved as JSON in `experiment_results/`.
 
 ## Repository Structure
 
 ```
-malak_platform/
-├── github_repo/           # Core platform code
-│   ├── experiments/       # Training experiments
-│   ├── malak/            # Platform modules (stubs)
-│   └── paper/            # Research paper (LaTeX)
-├── experiment_results/    # Experimental data and tables
-│   ├── fashion_mnist/    # Fashion-MNIST results
-│   ├── architectures/    # Architecture comparison results
-│   └── paper_tables/     # LaTeX tables for paper
-├── renode_experiments/    # Embedded validation
-│   ├── models/           # Compiled embedded binaries
-│   ├── platforms/        # Renode simulation scripts
-│   └── results/          # Simulation metrics
-├── fashion_mnist_experiment.py
-├── architecture_comparison.py
-└── simple_experiment.py
+malak-platform/
+├── malak/                  # Python package
+│   ├── training/           # Trainer, dataset loaders
+│   ├── quantization/       # DynamicPTQ, StaticPTQ, QAT
+│   ├── compression/        # Pruning, distillation
+│   ├── compiler/           # ONNX export
+│   ├── runtime/            # Inference benchmarking
+│   ├── monitoring/         # Profiling, drift detection
+│   ├── cli.py              # edgeai CLI
+│   └── model_card.py       # YAML model cards
+├── experiments/            # Reproducible experiment scripts
+├── embedded/               # ARM Cortex-M7 C inference (proof-of-concept)
+├── tests/                  # pytest test suite
+├── paper/                  # SoftwareX LaTeX paper
+├── pyproject.toml          # Package metadata
+└── LICENSE                 # MIT
 ```
 
-## Getting Started
-
-### Prerequisites
+## Tests
 
 ```bash
-# Python dependencies
-pip install torch torchvision
-
-# For Renode simulation
-bash renode_experiments/install_renode.sh
+pip install -e ".[dev]"
+pytest tests/ -v
 ```
 
-### Quick Start
+## API Overview
 
-```bash
-# Clone the repository
-git clone https://github.com/alnemari-m/malak-platform.git
-cd malak_platform
-
-# Run CIFAR-10 baseline experiment
-python simple_experiment.py
-
-# Run Fashion-MNIST validation
-python fashion_mnist_experiment.py
-
-# Run architecture comparison
-python architecture_comparison.py
-
-# Run Renode simulation
-cd renode_experiments
-./simulations/run_stm32h7.sh
-```
-
-## Research Paper
-
-The platform includes a comprehensive research paper with experimental validation:
-- **Location**: `github_repo/paper/`
-- **Main file**: `main_fixed.tex`
-- **Overleaf package**: `github_repo/paper/malak_paper_overleaf.zip`
-
-Compile with:
-```bash
-cd github_repo/paper
-pdflatex main_fixed.tex
-bibtex main_fixed
-pdflatex main_fixed.tex
-pdflatex main_fixed.tex
-```
-
-## Performance Summary
-
-| Metric | Value |
-|--------|-------|
-| INT8 Quantization Accuracy | 0.00% - 0.50% degradation |
-| Best Case | +0.05% improvement (Fashion-MNIST) |
-| STM32H7 Flash Usage | 31.7 KB (1.55%) |
-| STM32H7 RAM Usage | 10.5 KB (1.03%) |
-| Cortex-M7 Latency | ~42 ms @ 480 MHz |
-| Model Compression | 2.91× (SimpleCNN) |
-
-## Experimental Documentation
-
-- [Final Experimental Summary](FINAL_EXPERIMENTAL_SUMMARY.md)
-- [Integration Complete](INTEGRATION_COMPLETE.md)
-- [Renode Implementation](RENODE_IMPLEMENTATION_COMPLETE.md)
-- [Paper Package Info](OVERLEAF_PACKAGE_INFO.md)
-
-## Future Work
-
-The platform roadmap includes several planned enhancements to expand capabilities beyond the current research validation:
-
-### Multi-Language Runtime Architecture
-- **C++ Embedded Runtime**: Optimized static graph executor with memory planner and operator registry
-- **Mojo High-Performance Kernels**: MLIR-friendly quantized matmul/conv microkernels with LUT-based quantization
-- **Hardware Abstraction Layer**: Pluggable backends for NPU, DSP, and specialized accelerators
-
-### Advanced Compression Techniques
-- **Structured Pruning**: Channel-level and filter pruning for additional model compression
-- **Knowledge Distillation**: Teacher-student training for improved small model accuracy
-- **INT4 Quantization**: Ultra-low precision quantization for extreme edge devices
-- **Mixed-Precision**: Per-layer precision optimization based on sensitivity analysis
-
-### Extended Hardware Support
-- **Physical Hardware Validation**: Testing on actual STM32H7, nRF52, ESP32 devices
-- **NPU Integration**: Support for ARM Ethos-U, Google Edge TPU
-- **DSP Backends**: TI C6000, Qualcomm Hexagon integration
-- **RISC-V Support**: SiFive, Andes RISC-V core deployment
-
-### Custom IR and Optimization
-- **Edge IR**: Custom intermediate representation optimized for edge deployment
-- **Advanced Optimization Passes**: Operator fusion, constant folding, layout transforms
-- **Autotuning**: TVM/MLIR-based per-target compilation optimization
-- **FlatBuffers Serialization**: Compact model format for embedded systems
-
-### Production Features
-- **Reference Applications**: Vision (object detection), medical imaging, energy optimization
-- **Telemetry System**: Performance counters, energy monitoring, on-device logging
-- **Drift Detection**: Online accuracy monitoring and model degradation detection
-- **Privacy Policies**: Configurable data retention, fallback, and escalation policies
-- **Unified CLI**: Single `edgeai` command-line tool for build, quantize, flash, eval, profile
-
-### Extended Validation
-- **Additional Datasets**: ImageNet, COCO, medical imaging datasets
-- **More Architectures**: MobileNetV3, EfficientNetV2, YOLO variants
-- **Energy Measurements**: Actual power consumption on battery-powered devices
-- **Latency Profiling**: Detailed operator-level performance analysis
+| Module | Key Classes/Functions |
+|--------|----------------------|
+| `malak.training` | `Trainer`, `get_cifar10()`, `get_fashion_mnist()` |
+| `malak.quantization` | `DynamicPTQ`, `StaticPTQ`, `QAT` |
+| `malak.compression` | `MagnitudePruner`, `StructuredPruner`, `KnowledgeDistiller` |
+| `malak.compiler` | `export_onnx()`, `validate_onnx()` |
+| `malak.runtime` | `InferenceBenchmark` |
+| `malak.monitoring` | `LayerProfiler`, `DriftDetector` |
 
 ## License
 
-See [LICENSE](LICENSE) for details.
+MIT License. See [LICENSE](LICENSE) for details.
 
 ## Citation
 
-If you use this platform in your research, please cite our work (paper under review).
-
-## Acknowledgments
-
-Built for edge AI researchers validating compression techniques and embedded deployment pipelines for resource-constrained devices.
+If you use Malak in your research, please cite our paper (under review at SoftwareX).

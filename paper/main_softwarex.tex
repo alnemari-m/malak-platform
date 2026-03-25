@@ -1,7 +1,6 @@
 \documentclass[10pt,twocolumn]{article}
 
-\usepackage[top=2.54cm, bottom=2.54cm, left=2.0cm, right=2.0cm]{geometry}
-\usepackage{tgtermes}         % IAJIT uses Times New Roman (TeX Gyre Termes)
+\usepackage[margin=2cm]{geometry}
 \usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{graphicx}
@@ -9,74 +8,39 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 \usepackage{multirow}
 \usepackage{url}
-\usepackage{fancyhdr}
-
-% ── IAJIT header ──────────────────────────────────────────────
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\small\itshape The International Arab Journal of Information Technology}
-\fancyfoot[C]{\thepage}
-\renewcommand{\headrulewidth}{0pt}
-
-% ── Remove default title spacing ─────────────────────────────
-\makeatletter
-\renewcommand{\maketitle}{%
-  \twocolumn[%
-    \begin{center}
-    {\Large\bfseries Malak: A Python Toolkit for Edge AI Model Optimization\par}
-    \vspace{14pt}
-    %
-    % ── Authors with numbered affiliations ────────────────
-    {\normalsize
-      \textbf{Mohammed Alnemari}$^{1,2}$\par}
-    \vspace{6pt}
-    %
-    % ── Affiliations ─────────────────────────────────────
-    {\small
-      $^{1}$Department of Computer Engineering, Faculty of Computer Science and Information Technology, University of Tabuk, Tabuk, Saudi Arabia\par
-      $^{2}$AIST Research Center, University of Tabuk, Tabuk, Saudi Arabia\par}
-    \vspace{4pt}
-    %
-    % ── Emails ───────────────────────────────────────────
-    {\small\itshape
-      mnemari@ut.edu.sa\par}
-    \vspace{16pt}
-    %
-    % ── Abstract ─────────────────────────────────────────
-    \parbox{0.92\textwidth}{\small
-      \textbf{Abstract:}
-      Deploying deep learning models on resource-constrained edge devices requires systematic model compression and optimization.
-      However, PyTorch's low-level quantization and pruning APIs require significant boilerplate code, making it difficult for researchers and students to quickly evaluate compression techniques.
-      We present Malak, an open-source Python toolkit that provides a unified, high-level API for training, quantization (dynamic and static post-training quantization, quantization-aware training), pruning (magnitude and structured), knowledge distillation, ONNX model export, per-layer latency profiling, and distribution drift detection.
-      Malak wraps PyTorch's quantization framework into task-oriented abstractions and exposes both a Python API and a command-line interface.
-      We validate Malak on CIFAR-10 and Fashion-MNIST benchmarks using MobileNetV2, ResNet18, EfficientNet-B0, and a custom SimpleCNN.
-      Quantization-aware training achieves 3.10$\times$ model compression with only 1.09\% accuracy degradation.
-      Dynamic post-training quantization preserves accuracy within 0.13\% across all tested architectures.
-      Magnitude pruning at 50\% sparsity retains accuracy within 2.15\% of the baseline after fine-tuning.
-      The toolkit is available under the MIT license at \url{https://github.com/alnemari-m/malak-platform}.\par}
-    \vspace{8pt}
-    %
-    % ── Keywords ─────────────────────────────────────────
-    \parbox{0.92\textwidth}{\small
-      \textbf{Keywords:} \textit{Edge AI, model compression, quantization, pruning, knowledge distillation, TinyML.}\par}
-    \vspace{8pt}
-    %
-    % ── Received / Accepted ──────────────────────────────
-    {\small\itshape Received; accepted\par}
-    \vspace{6pt}
-    \rule{0.92\textwidth}{0.4pt}
-    \vspace{10pt}
-    \end{center}
-  ]%
-}
-\makeatother
+\usepackage{microtype}
+\sloppy
 
 \begin{document}
 
+\title{Malak: A Python Toolkit for Edge AI Model Optimization}
+
+\author{Mohammed Hassan Alnemari$^{1,2}$ \\[4pt]
+\small $^{1}$Department of Computer Engineering, Faculty of Computing and IT,\\
+\small University of Tabuk, Tabuk, Saudi Arabia\\
+\small $^{2}$AIST Research Center, University of Tabuk, Saudi Arabia\\
+\small \texttt{mnemari@ut.edu.sa}}
+
 \maketitle
+
+\begin{abstract}
+Deploying deep learning models on resource-constrained edge devices requires systematic model compression and optimization.
+However, PyTorch's low-level quantization and pruning APIs require significant boilerplate code, making it difficult for researchers and students to quickly evaluate compression techniques.
+We present Malak, an open-source Python toolkit that provides a unified, high-level API for training, quantization (dynamic and static post-training quantization, quantization-aware training), pruning (magnitude and structured), knowledge distillation, ONNX model export, per-layer latency profiling, and distribution drift detection.
+Malak wraps PyTorch's quantization framework into task-oriented abstractions and exposes both a Python API and a command-line interface.
+We validate Malak on CIFAR-10 and Fashion-MNIST benchmarks using MobileNetV2, ResNet18, EfficientNet-B0, and a custom SimpleCNN.
+Quantization-aware training achieves 3.10$\times$ model compression with only 1.09\% accuracy degradation.
+Dynamic post-training quantization preserves accuracy within 0.13\% across all tested architectures.
+Magnitude pruning at 50\% sparsity retains accuracy within 2.15\% of the baseline after fine-tuning.
+The toolkit is available under the MIT license at \url{https://github.com/alnemari-m/malak-platform}.
+\end{abstract}
+
+\newcommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1}
+\keywords{
+Edge AI, model compression, quantization, pruning, knowledge distillation, TinyML
+}
 
 %% ================================================================
 \section{Introduction}
@@ -123,7 +87,7 @@ Section~\ref{sec:conclusion} concludes the paper.
 \subsection{Model Quantization}
 
 Post-training quantization (PTQ) reduces model precision after training without retraining.
-Dynamic PTQ quantizes weights to INT8 and computes activations in floating point at runtime, requiring no calibration data but providing limited compression for convolutional layers~\cite{ptq}.
+Dynamic PTQ quantizes weights to INT8 and computes activations in floating point at runtime, requiring no calibration data but providing limited compression for convolutional layers~\cite{ptq}.\allowbreak{}
 Static PTQ calibrates observer statistics on a representative dataset and quantizes both weights and activations, achieving full INT8 inference.
 Quantization-aware training (QAT) inserts fake-quantization nodes during training, allowing weights to adapt to quantization noise before final conversion to INT8~\cite{qat}.
 PyTorch implements all three approaches through its \texttt{torch.quantization} namespace.
@@ -153,7 +117,7 @@ Malak operates at a higher abstraction level than these tools, providing task-or
 \caption{Comparison of model optimization tools.}
 \label{tab:comparison}
 \centering
-\footnotesize
+\scriptsize
 \begin{tabular}{lccccc}
 \toprule
 \textbf{Feature} & \textbf{Malak} & \textbf{TFLite} & \textbf{INC} & \textbf{TVM} & \textbf{CMSIS} \\
@@ -184,64 +148,57 @@ Malak is organized into six modules (Figure~\ref{fig:architecture}), installed v
 
 \begin{figure}[t]
 \centering
+\resizebox{\columnwidth}{!}{%
 \begin{tikzpicture}[
-    module/.style={draw, thick, rounded corners=4pt, minimum width=2.2cm,
-                   minimum height=0.78cm, align=center, font=\footnotesize\sffamily},
-    lbl/.style={font=\tiny\sffamily\bfseries, color=black!40, rotate=90, anchor=south},
-    arr/.style={-{Stealth[length=5pt]}, thick, color=black!65},
-    cliarr/.style={-{Stealth[length=4pt]}, color=black!30, dashed, thin},
-    sep/.style={black!12, thick},
+    module/.style={draw, thick, rounded corners=4pt, minimum width=2.6cm, minimum height=0.85cm, align=center, font=\footnotesize\sffamily},
+    phase/.style={draw, thick, dashed, rounded corners=6pt, inner sep=6pt, fill=gray!3},
+    arr/.style={->, thick, >=stealth, color=black!70},
+    cliarr/.style={->, thick, >=stealth, color=black!30, dashed},
 ]
 
-% ── Row 1: Model Preparation ──────────────────────────
-\node[module, fill=blue!10, draw=blue!45] (train)
-    at (0,0) {\textbf{Training}\\[-1pt]{\tiny SGD/Adam}};
-\node[module, fill=green!10, draw=green!45!black] (quant)
-    at (2.8,0) {\textbf{Quantization}\\[-1pt]{\tiny PTQ, QAT}};
-\node[module, fill=orange!10, draw=orange!55!black] (comp)
-    at (5.6,0) {\textbf{Compression}\\[-1pt]{\tiny Prune, Distill}};
+% Phase labels
+\node[font=\scriptsize\sffamily\bfseries, color=black!50] at (-0.8, 0.6) {MODEL PREPARATION};
+\node[font=\scriptsize\sffamily\bfseries, color=black!50] at (-0.8, -1.5) {DEPLOYMENT};
+\node[font=\scriptsize\sffamily\bfseries, color=black!50] at (-0.8, -3.3) {INTERFACE};
 
-% ── Row 2: Deployment ─────────────────────────────────
-\node[module, fill=red!8, draw=red!45!black] (export)
-    at (0,-1.6) {\textbf{Compiler}\\[-1pt]{\tiny ONNX Export}};
-\node[module, fill=purple!8, draw=purple!45!black] (runtime)
-    at (2.8,-1.6) {\textbf{Runtime}\\[-1pt]{\tiny Latency, Tput}};
-\node[module, fill=cyan!8, draw=cyan!45!black] (monitor)
-    at (5.6,-1.6) {\textbf{Monitoring}\\[-1pt]{\tiny Profile, Drift}};
+% Row 1: Model Preparation
+\node[module, fill=blue!12, draw=blue!50] (train) at (0,0) {\textbf{Training}\\[-1pt]{\tiny SGD/Adam, Scheduler}};
+\node[module, fill=green!12, draw=green!50!black] (quant) at (3.3,0) {\textbf{Quantization}\\[-1pt]{\tiny PTQ, Static, QAT}};
+\node[module, fill=orange!12, draw=orange!60!black] (comp) at (6.6,0) {\textbf{Compression}\\[-1pt]{\tiny Pruning, Distillation}};
 
-% ── Row 3: CLI ────────────────────────────────────────
-\node[module, fill=gray!8, draw=gray!50, minimum width=6.2cm] (cli)
-    at (2.8,-3.2) {\textbf{CLI}~~\texttt{edgeai}\\[-1pt]{\tiny train\,$|$\,quantize\,$|$\,evaluate\,$|$\,export\,$|$\,profile}};
+% Horizontal separator
+\draw[black!15, thick] (-1.5,-0.7) -- (8.1,-0.7);
 
-% ── Phase labels (left margin, rotated) ───────────────
-\node[lbl] at (-1.55, 0)    {PREPARATION};
-\node[lbl] at (-1.55,-1.6)  {DEPLOYMENT};
-\node[lbl] at (-1.55,-3.2)  {INTERFACE};
+% Row 2: Deployment & Analysis
+\node[module, fill=red!10, draw=red!50!black] (export) at (0,-1.5) {\textbf{Compiler}\\[-1pt]{\tiny ONNX Export}};
+\node[module, fill=purple!10, draw=purple!50!black] (runtime) at (3.3,-1.5) {\textbf{Runtime}\\[-1pt]{\tiny Latency, Throughput}};
+\node[module, fill=cyan!10, draw=cyan!50!black] (monitor) at (6.6,-1.5) {\textbf{Monitoring}\\[-1pt]{\tiny Profiling, Drift}};
 
-% ── Separators ────────────────────────────────────────
-\draw[sep] (-1.3,-0.8) -- (6.9,-0.8);
-\draw[sep] (-1.3,-2.4) -- (6.9,-2.4);
+% Horizontal separator
+\draw[black!15, thick] (-1.5,-2.3) -- (8.1,-2.3);
 
-% ── Row 1 data flow (horizontal) ─────────────────────
-\draw[arr] (train.east) -- (quant.west);
-\draw[arr] (quant.east) -- (comp.west);
+% Row 3: CLI
+\node[module, fill=gray!10, draw=gray!60, minimum width=7.2cm] (cli) at (3.3,-3.1) {\textbf{CLI} ~\texttt{edgeai}\\[-1pt]{\tiny train $|$ quantize $|$ evaluate $|$ export $|$ profile}};
 
-% ── Row 1 → Row 2 (vertical, straight down) ──────────
-\draw[arr] (train.south)  -- (export.north);
-\draw[arr] (quant.south)  -- (runtime.north);
-\draw[arr] (comp.south)   -- (monitor.north);
+% Data flow arrows (Row 1)
+\draw[arr] (train) -- (quant);
+\draw[arr] (train.south east) -- (comp.south west);
 
-% ── Row 2 data flow (horizontal) ─────────────────────
-\draw[arr] (export.east)   -- (runtime.west);
-\draw[arr] (runtime.east)  -- (monitor.west);
+% Data flow arrows (Row 1 to Row 2)
+\draw[arr] (quant) -- (export);
+\draw[arr] (comp.south) -- (export.north east);
+\draw[arr] (export) -- (runtime);
+\draw[arr] (runtime) -- (monitor);
 
-% ── CLI dashed arrows (straight up to Row 2) ─────────
-\draw[cliarr] (cli.north -| export)  -- (export.south);
-\draw[cliarr] (cli.north -| runtime) -- (runtime.south);
+% CLI arrows (dashed, subtle)
+\draw[cliarr] (cli.north -| train) -- (train.south);
+\draw[cliarr] (cli.north -| quant) -- (quant.south);
+\draw[cliarr] (cli.north) -- (runtime.south);
 \draw[cliarr] (cli.north -| monitor) -- (monitor.south);
 
-\end{tikzpicture}
-\caption{Malak software architecture. Solid arrows show data flow: horizontally within each layer and vertically from preparation to deployment. Dashed arrows indicate CLI access points.}
+\end{tikzpicture}%
+}% end resizebox
+\caption{Malak software architecture. Solid arrows show data flow. Dashed arrows indicate CLI access points. Modules are grouped into three layers: preparation, deployment, and interface.}
 \label{fig:architecture}
 \end{figure}
 
@@ -256,8 +213,8 @@ The trainer automatically tracks the best model checkpoint and reports per-epoch
 The quantization module provides three classes:
 
 \begin{itemize}
-    \item \textbf{DynamicPTQ}: Wraps \texttt{torch.quantization.quantize\_dynamic} to quantize Linear layers to INT8. Requires no calibration data. Suitable for models dominated by fully-connected layers.
-    \item \textbf{StaticPTQ}: Inserts observers, runs a calibration pass over a representative dataset, and converts all supported layers to INT8. Produces full model compression.
+    \item \textbf{DynamicPTQ}: Wraps \texttt{torch.quantization.\allowbreak{}quantize\_dynamic} to quantize Linear layers to INT8. Requires no calibration data. Suitable for models dominated by fully-connected layers.
+    \item \textbf{StaticPTQ}: Inserts observers, runs a calibration pass over a representative dataset, and converts all supported layers to INT8.
     \item \textbf{QAT}: A three-step API (\texttt{prepare} $\to$ \texttt{train} $\to$ \texttt{convert}) that inserts fake-quantization observers during training, allowing weights to adapt to quantization noise before final INT8 conversion.
 \end{itemize}
 
@@ -459,9 +416,6 @@ The toolkit is available at \url{https://github.com/alnemari-m/malak-platform} u
 \section*{Acknowledgments}
 The author thanks the open-source PyTorch community for the quantization and pruning APIs upon which Malak is built.
 
-\vspace{6pt}
-\noindent\textbf{Mohammed Hassan Alnemari} received the B.Sc.\ degree in computer engineering from Taif University, Saudi Arabia, and the M.S.\ and Ph.D.\ degrees in computer engineering from the University of California, Irvine (UCI), USA. He is currently an Assistant Professor and Chair of the Computer Engineering Department at the University of Tabuk, Saudi Arabia. His research interests include Edge Artificial Intelligence (Edge AI), TinyML, neural network compression, efficient deep learning architectures, and hardware--software co-design for intelligent embedded systems. His work focuses on enabling energy-efficient machine learning inference on resource-constrained edge devices.
-
 \begin{thebibliography}{99}
 
 \bibitem{warden2019tinyml}
@@ -474,10 +428,10 @@ Z.~Zhou, X.~Chen, E.~Li, L.~Zeng, K.~Luo, and J.~Zhang, ``Edge intelligence: The
 B.~Jacob \textit{et al.}, ``Quantization and training of neural networks for efficient integer-arithmetic-only inference,'' in \textit{Proc. IEEE CVPR}, 2018, pp.~2704--2713.
 
 \bibitem{qat}
-Y.~Bhalgat, J.~Lee, M.~Nagel, T.~Blankevoort, and N.~Kwak, ``Quantization aware training for low bit-width neural networks,'' in \textit{NeurIPS Workshop}, 2020.
+Y.~Bhalgat, J.~Lee, M.~Nagel, T.~Blankevoort, and N.~Kwak, ``LSQ+: Improving low-bit quantization through learnable offsets and better initialization,'' in \textit{Proc. IEEE CVPR Workshops}, 2020.
 
 \bibitem{tflite}
-M.~Abadi \textit{et al.}, ``TensorFlow Lite: On-device machine learning framework,'' Google Research, 2019.
+Google, ``TensorFlow Lite: Deploy machine learning models on mobile and edge devices,'' 2019. [Online]. Available: \url{https://www.tensorflow.org/lite}
 
 \bibitem{tflitemicro}
 R.~David \textit{et al.}, ``TensorFlow Lite Micro: Embedded machine learning for TinyML systems,'' in \textit{Proc. MLSys}, vol.~3, 2021, pp.~800--811.
@@ -498,10 +452,10 @@ L.~Deng, G.~Li, S.~Han, L.~Shi, and Y.~Xie, ``Model compression and hardware acc
 G.~Hinton, O.~Vinyals, and J.~Dean, ``Distilling the knowledge in a neural network,'' in \textit{NIPS Deep Learning Workshop}, 2015.
 
 \bibitem{structured-pruning}
-Z.~Liu \textit{et al.}, ``Learning efficient convolutional networks through network slimming,'' in \textit{Proc. IEEE ICCV}, 2017, pp.~2736--2744.
+Z.~Liu \textit{et al.}, ``Learning efficient convolutional networks through network slimming,'' in \textit{Proc. IEEE ICCV}, 2017, pp.~2755--2763.
 
 \bibitem{lottery-ticket}
-J.~Frankle and M.~Carlin, ``The lottery ticket hypothesis: Finding sparse, trainable neural networks,'' \textit{arXiv preprint arXiv:1803.03635}, 2018.
+J.~Frankle and M.~Carbin, ``The lottery ticket hypothesis: Finding sparse, trainable neural networks,'' \textit{arXiv preprint arXiv:1803.03635}, 2018.
 
 \bibitem{mobilenetv3}
 A.~Howard \textit{et al.}, ``Searching for MobileNetV3,'' in \textit{Proc. IEEE ICCV}, 2019, pp.~1314--1324.
